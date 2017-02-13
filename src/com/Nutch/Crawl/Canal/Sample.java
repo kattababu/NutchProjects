@@ -1,4 +1,4 @@
-
+ package com.Nutch.Crawl.Canal;
 public class Sample {
 
 	public Sample() {
