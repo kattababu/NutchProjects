@@ -39,6 +39,8 @@ public class CanalCNT {
 	ResultScanner resc;
 	String rownames=null,family=null,qualifier=null,content=null;
 	
+	static String title=null;
+	
 	public void ContRows()
 	{
 		try
@@ -68,7 +70,7 @@ public class CanalCNT {
 							
 							if(rownames.contains("/peliculas"))
 							{
-								System.out.println(rownames);
+								//System.out.println(rownames);
 								ContINTRows(rownames);
 							}
 							
@@ -141,21 +143,69 @@ public class CanalCNT {
 						//System.out.println(content);
 						 Document document = Jsoup.parse(content);
 						 
+						 /*
+						 List<String> list2 =Xsoup.compile("//div[@class='lista']/a/div[@class='titulo']/text()").evaluate(document).list();
+							for(String title1:list2)
+							{
+								if(title1!=null)
+								{
+									title=title1;
+									
+									
+								//System.out.println(title);
+								//mt.QualifierMatch(href);
+								//
+								}
+								
+							}
+							*/
+
+						 
+						 
+						 
 						List<String> list =Xsoup.compile("//div[@class='lista']/a/@href").evaluate(document).list();
+						//List<String> list2 =Xsoup.compile("//div[@class='lista']/a/div[@class='titulo']/text()").evaluate(document).list();
+						
 						//String a=list.iterator().;
 						//System.out.println(a);
 						
 						//Xsoup.select(element, list)
 						for(String href:list)
 						{
+							
+							
 							if(href!=null)
 							{
-							System.out.println(href);
-							mt.QualifierMatch(href);
+								 
+								
+								mt.QualifierMatch(href);
+							//System.out.println(href);
+							
+							
+														//
+							}
+							
+							
+						}
+						/*
+						List<String> list2 =Xsoup.compile("//div[@class='lista']/a/div[@class='titulo']/text()").evaluate(document).list();
+						for(String title1:list2)
+						{
+							if(title1!=null)
+							{
+								title=title1;
+							//System.out.println(title);
+							//mt.QualifierMatch(href);
 							//
 							}
 							
 						}
+						*/
+					
+						
+						
+						
+						
 						
 						
 						
