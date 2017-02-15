@@ -30,7 +30,7 @@ public class Sample {
 		ResultScanner rescan=ht.getScanner(sc);
 		
 		String rownames=null,family=null,qualifier=null;
-		String content=null,textdata=null;;
+		String content=null;
 		for(Result res = rescan.next(); (res != null); res=rescan.next())
 		{
 			for(KeyValue kv:res.list())
