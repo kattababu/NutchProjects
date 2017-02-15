@@ -52,5 +52,16 @@
 	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/commons-io-2.1.jar"/>
 	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/commons-httpclient-3.1.jar"/>
 	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/commons-el-1.0.jar"/>
+	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/asm-3.1.jar"/>
+	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/avro-1.5.3.jar"/>
+	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/avro-ipc-1.5.3.jar"/>
+	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/commons-beanutils-core-1.8.0.jar"/>
+	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/commons-configuration-1.6.jar"/>
+	<classpathentry kind="lib" path="/NutchCrawl/JarsFiles/commons-digester-1.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
