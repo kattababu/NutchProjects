@@ -3,7 +3,9 @@
  */
 package com.Nutch.Crawl.Canal;
 
-import java.util.List;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+//import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -46,7 +48,22 @@ public class CanalMovRich {
 	String imag=null;
 	String uname=null;
 	
-	List<String> list2=null;
+	static FileOutputStream fos =null;
+	static PrintStream ps=null;
+
+	
+	//List<String> list2=null;
+	
+	static 	{
+		//Date date = new Date() ;
+		  // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmssSSSSSS") ;
+		 //long time = System.currentTimeMillis();
+			
+			//file= new File("/katta/ActionHBO/ACTHBORM_"+dateFormat.format(date)+".txt"); //Your file
+			FileStore.RichMedia("richmedia");
+			
+	 }
+
 	
 	
 	
@@ -54,6 +71,11 @@ public class CanalMovRich {
 	{
 		try
 		{
+			
+			fos = new FileOutputStream(FileStore.fileRM,true);
+			ps = new PrintStream(fos);
+			   System.setOut(ps);
+			
 			
 			Configuration config=HBaseConfiguration.create();
 			ht=new HTable(config,"canal_webpage");
@@ -154,6 +176,8 @@ public class CanalMovRich {
 				
 				ht.close();
 				resc.close();
+				fos.close();
+				ps.close();
 				
 			}
 			

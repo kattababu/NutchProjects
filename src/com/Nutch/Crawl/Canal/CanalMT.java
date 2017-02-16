@@ -5,6 +5,9 @@ package com.Nutch.Crawl.Canal;
 
 
 
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.KeyValue;
@@ -36,6 +39,21 @@ public class CanalMT {
 	Scan sc=null;
 	ResultScanner resc;
 	String rownames=null,family=null,qualifier=null,content=null,splitter=null;
+	
+	static FileOutputStream fos =null;
+	static PrintStream ps=null;
+
+	
+	static 	{
+		//	Date date = new Date() ;
+		//	   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmssSSSSSS") ;
+			 //long time = System.currentTimeMillis();
+				
+		//		file= new File("/katta/ActionHBO/ACTHBOMV_"+dateFormat.format(date)+".txt"); //Your file
+				
+				FileStore.MovieTable("movie");
+		 }
+
 	
 	public void QualifierMatch(String name)
 	{
@@ -243,6 +261,12 @@ public class CanalMT {
 		try
 		{
 			
+			fos = new FileOutputStream(FileStore.fileM,true);
+			ps = new PrintStream(fos);
+			   System.setOut(ps);
+			
+			
+			
 			Configuration config=HBaseConfiguration.create();
 			ht=new HTable(config,"canal_webpage");
 			sc=new Scan();
@@ -369,6 +393,8 @@ public class CanalMT {
 				
 				ht.close();
 				resc.close();
+				fos.close();
+				ps.close();
 				
 			}
 			
