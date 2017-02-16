@@ -5,7 +5,6 @@ package com.Nutch.Crawl.Canal;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-//import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -20,25 +19,19 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-//import com.sun.jersey.server.wadl.generators.resourcedoc.xhtml.Elements;
-
 /**
  * @author surendra
  *
  */
-public class CanalMovRich {
-
-	//private static final boolean String = false;
-
-
+public class CanalTvshowRM {
 
 	/**
 	 * 
 	 */
-	public CanalMovRich() {
+	public CanalTvshowRM() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	
 	HTable ht=null;
 	Scan sc=null;
@@ -54,19 +47,8 @@ public class CanalMovRich {
 	
 
 	
-	//List<String> list2=null;
 	
 	
-	static 	{
-		//Date date = new Date() ;
-		  // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmssSSSSSS") ;
-		 //long time = System.currentTimeMillis();
-			
-			//file= new File("/katta/ActionHBO/ACTHBORM_"+dateFormat.format(date)+".txt"); //Your file
-			FileStore.RichMedia("richmedia");
-			
-	 }
-
 	
 	
 	
@@ -75,9 +57,9 @@ public class CanalMovRich {
 		try
 		{
 			
-			fos = new FileOutputStream(FileStore.fileRM,true);
-			ps = new PrintStream(fos);
-			   System.setOut(ps);
+			//fos = new FileOutputStream(FileStore.fileRM,true);
+			//ps = new PrintStream(fos);
+			   //System.setOut(ps);
 			
 			
 			Configuration config=HBaseConfiguration.create();
@@ -125,31 +107,6 @@ public class CanalMovRich {
 							
 							
 							Tabs();
-							
-							
-						
-							//CanalMovieCNT(rownames);
-							//ImageUrls();
-							
-							
-										
-				
-				
-				
-				
-							
-							
-							
-							
-							
-							
-							
-							//System.out.println("Title:"+CanalCNT.title);
-							
-							
-						
-							
-							
 							
 							 
 							
@@ -427,5 +384,5 @@ public class CanalMovRich {
 		//System.out.println(splitter);
 	}
 
+	
 }
-

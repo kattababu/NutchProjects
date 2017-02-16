@@ -179,35 +179,7 @@ public class CanalMT {
 							
 							CanalMovieData(rownames);
 							
-							/*
 							
-							content=Bytes.toString(kv.getValue());
-							
-							
-							System.out.println(content);
-							System.out.println(rownames);
-							
-							
-							
-							
-							 Document document = Jsoup.parse(content);
-							 Element el=document.head();
-							 
-							 String sk=splitter;
-								System.out.println("SK VAlue:"+sk);
-								//// 
-								
-								
-								
-								//System.out.println("Title:"+CanalCNT.title);
-								//
-							// System.out.println(document);
-							//meta[@property="og:title"]/@content
-							 
-							String title=Xsoup.compile("//meta[@property='og:title']/@content").evaluate(el).get();
-							System.out.println(title);
-							
-							*/
 						}
 							
 							

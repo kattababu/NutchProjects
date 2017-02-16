@@ -39,9 +39,11 @@ public class CanalCNT {
 	ResultScanner resc;
 	String rownames=null,family=null,qualifier=null,content=null;
 	
-	CanalMovRich cmr=new CanalMovRich();
+//	CanalMovRich cmr=new CanalMovRich();
 	
 	CanalTVShow ctvs=new CanalTVShow();
+	//CanalMT mt=new CanalMT();//---------------->
+	
 	
 	 
 	// 
@@ -72,6 +74,7 @@ public class CanalCNT {
 							//System.out.println(" The RowsName are:"+rownames);
 							
 							
+							/*
 							/// For Movies Details........///
 							
 							if(rownames.contains("/peliculas"))
@@ -86,7 +89,7 @@ public class CanalCNT {
 								
 								
 							}
-							
+							/////////////////  TVSHows////////////////////
 						
 							if(rownames.contains("/novelas"))
 							{
@@ -103,11 +106,13 @@ public class CanalCNT {
 								
 								
 							}
-							/*
 							
-							if(rownames.contains("/variedades")||rownames.contains("/periodisticos")||rownames.contains("/deportivos"))
+							*/
+							
+							
+							if(rownames.contains("/variedades")||rownames.contains("/deportivos"))
 							{
-								System.out.println(rownames);
+								//System.out.println(rownames);
 								
 								//ImageUrlS();
 								//cmr.ImageUrls(rownames);
@@ -122,7 +127,7 @@ public class CanalCNT {
 							}
 							
 							
-							
+							/*
 							if(rownames.contains("/periodisticos"))
 							{
 								System.out.println(rownames);
@@ -203,7 +208,6 @@ public class CanalCNT {
 	public void ContINTRows(String name)
 	{
 		
-		CanalMT mt=new CanalMT();//---------------->
 		
 		//CanalTVShow ctvs=new CanalTVShow();
 		
@@ -242,10 +246,10 @@ public class CanalCNT {
 							{
 								 
 								
-								mt.QualifierMatch(href);//------------------->
+								//mt.QualifierMatch(href);//------------------->
 								//cmr.QualifierMatch(href);
 								
-								//ctvs.QualifierMatchTv(href);
+								ctvs.QualifierMatchTv(href);
 							//System.out.println(href);
 							
 							

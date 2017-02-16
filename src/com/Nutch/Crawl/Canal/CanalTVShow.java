@@ -47,6 +47,8 @@ public class CanalTVShow {
 	
 	static FileOutputStream fos =null;
 	static PrintStream ps=null;
+	
+	/*
 
 	
 	
@@ -61,7 +63,7 @@ public class CanalTVShow {
 			 }
 
 	
-	
+	*/
 
 
 	
@@ -111,13 +113,13 @@ public class CanalTVShow {
 								
 								////////// SK Value//////////////
 								msd.MD5(Data);
-								System.out.print(msd.md5s+"#<>#");
+								System.out.print(msd.md5s.trim()+"#<>#");
 								
 								
 								
 								////////// Title//////////////
 								String title=Data;
-								System.out.print(title);
+								System.out.print(title.trim()+"#<>#");
 								
 								////////// Original Title/////////
 								System.out.print("#<>#");
@@ -180,7 +182,7 @@ public class CanalTVShow {
 								
 								
 						//////////Reference URL/////////
-								System.out.print(url+"#<>#");
+								System.out.print(url.trim()+"#<>#");
 								
 								
 						//////////Created_At/////////
@@ -194,7 +196,6 @@ public class CanalTVShow {
 								
 								
 								
-								System.out.println("\n\n");
 								
 
 							
@@ -234,7 +235,7 @@ public class CanalTVShow {
 		{
 			try
 			{
-				
+				System.out.print("\n");
 				ht.close();
 				resc.close();
 				fos.close();
@@ -329,26 +330,27 @@ public class CanalTVShow {
 							  
 							  msd.MD5(imgs);
 								
-								System.out.print(msd.md5s+"#<>#");
+								System.out.print(msd.md5s.trim()+"#<>#");
 								
 								
 								/// Program _SK//////////// Value
 								msd.MD5(Data);
-								System.out.print(msd.md5s+"#<>#");
+								System.out.print(msd.md5s.trim()+"#<>#");
 								
 								
 								/////////////Program_Type///////////
-								System.out.print("TVShow"+"#<>#");
+								System.out.print("tvshow"+"#<>#");
 								
 								
 						/////////////Media_Type///////////
-								System.out.print("Image"+"#<>#");
+								System.out.print("image"+"#<>#");
 								
 						/////////////Image_Type///////////
-								System.out.print("Medium"+"#<>#");
+								System.out.print("small"+"#<>#");
 								
 						/////////////Size///////////
 								System.out.print("#<>#");
+								
 						/////////////Dimensions///////////
 								System.out.print("#<>#");
 								
@@ -357,11 +359,11 @@ public class CanalTVShow {
 								
 								
 						/////////////Image_URL///////////
-								System.out.print(imgs+"#<>#");
+								System.out.print(imgs.trim()+"#<>#");
 								
 								
 						/////////////Reference_url///////////
-								System.out.print(refurl+"#<>#");
+								System.out.print(refurl.trim()+"#<>#");
 								
 								
 						///////////Aux_Info////////
@@ -378,10 +380,8 @@ public class CanalTVShow {
 								
 								
 								
-								System.out.println("\n\n");
-
-
 								
+								System.out.print("\n");
 								
 								
 
@@ -420,6 +420,7 @@ public class CanalTVShow {
 			try
 			{
 				
+				
 				ht.close();
 				resc.close();
 				fos.close();
@@ -446,8 +447,18 @@ public class CanalTVShow {
 	{
 		String[] split=name.split("\\/");
 		splitter=split[split.length - 1];
-		//System.out.println(splitter);
+		//stem.out.println(splitter);
 	}	
+	
+	public void Splittitle(String name)
+	{
+		String[] split=name.split("\\-");
+		splitter=split[split.length - 2];
+		//System.out.println(splitter);
+	}
+	
+	
+
 	
 	//////////////////////////////  RemainingTvShow Files///////////////////
 	
@@ -477,24 +488,22 @@ public class CanalTVShow {
 						
 						Spliturl(name);
 						
+					
 						if(rownames.contains(splitter))
 						{
 							
 						
 							
 							//content=Bytes.toString(kv.getValue());
-							System.out.println(rownames);
-							//CanalMovieCNT(rownames);
-							//String sk=splitter;
-							//System.out.println("SK VAlue:"+sk);
-							//System.out.println("Title:"+CanalCNT.title);
-							
+							//System.out.println(rownames);
+							CanalTvShowCNT(rownames);
 							
 							
 							
 							 
 							
 						}
+						
 								
 								
 					}
@@ -536,5 +545,260 @@ public class CanalTVShow {
 	}
 	
 	
+	////////////////////////////////////////////
+	
+	
+	
+	
+	public void CanalTvShowCNT(String name)
+	{
+		
+		//CanalCNT cnt=new CanalCNT();
+		
+		try
+		{
+			
+			Configuration config=HBaseConfiguration.create();
+			ht=new HTable(config,"canal_webpage");
+			sc=new Scan();
+			resc=ht.getScanner(sc);
+			for(Result res = resc.next(); (res != null); res=resc.next())
+			{
+				for(KeyValue kv:res.list())
+				{
+					
+					rownames=Bytes.toString(kv.getRow());
+					family=Bytes.toString(kv.getFamily());
+					qualifier=Bytes.toString(kv.getQualifier());
+					
+					
+					if(family.equals("il"))
+					{
+					
+					
+						if(rownames.equals(name) && !rownames.contains("/noticias/"))
+						{
+						
+							
+							System.out.println(rownames);
+							CanalTvshowData(rownames);
+							
+							
+						}
+							
+							
+						}
+								
+								
+					}
+							
+							
+						}
+					
+				
+			
+			
+			
+			
+			
+		}
+		
+		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				
+				ht.close();
+				resc.close();
+				
+			}
+			
+			catch(Exception e)
+			{
+				e.getMessage();
+			}
+		}
+		
+		
+		
+	}
+	
+	////////////////////////////////////////// TVShows DataView/////////////////////////
+	
+	
+	
+	public void CanalTvshowData(String name)
+	{
+		
+		//CanalCNT cnt=new CanalCNT();
+		
+		try
+		{
+			
+			//fos = new FileOutputStream(FileStore.fileM,true);
+			//ps = new PrintStream(fos);
+			  // System.setOut(ps);
+			
+			
+			
+			Configuration config=HBaseConfiguration.create();
+			ht=new HTable(config,"canal_webpage");
+			sc=new Scan();
+			resc=ht.getScanner(sc);
+			for(Result res = resc.next(); (res != null); res=resc.next())
+			{
+				for(KeyValue kv:res.list())
+				{
+					
+					rownames=Bytes.toString(kv.getRow());
+					family=Bytes.toString(kv.getFamily());
+					qualifier=Bytes.toString(kv.getQualifier());
+					
+										
+						if(rownames.equals(name))
+						{
+						
+							if(family.equals("f") && qualifier.equals("cnt"))
+							{
+								content=Bytes.toString(kv.getValue());
+								Document document = Jsoup.parse(content);
+								////////// SK Value//////////////
+								
+								String url=Xsoup.compile("//meta[@property='og:url']/@content").evaluate(document).get();
+								Spliturl(url);
+								System.out.print(splitter.trim()+"#<>#");
+								
+								
+								////////// Title//////////////
+								String title=Xsoup.compile("//meta[@property='og:title']/@content").evaluate(document).get();
+								Splittitle(title);
+								System.out.print(splitter.trim()+"#<>#");
+								
+								
+								////////// Original Title/////////
+								System.out.print("#<>#");
+								
+
+								////////// Other Titles/////////
+								System.out.print("#<>#");
+						
+								/////// Description///////////////
+								
+								String descript=Xsoup.compile("//*[@id='slideshow']/div[2]/div/div/text()").evaluate(document).get();
+													
+								System.out.print(descript.trim()+"#<>#");
+								
+						////////// Genres/////////
+								System.out.print("#<>#");
+								
+						//////////Sub Genres/////////
+								System.out.print("#<>#");
+								
+								
+						//////////Category/////////
+								System.out.print("#<>#");
+								
+								
+						////////// Duration/////////
+								System.out.print("#<>#");
+								
+								
+								
+						//////////Languages/////////
+								System.out.print("#<>#");
+								
+						//////////Original Languages/////////
+								System.out.print("#<>#");
+								
+								
+						//////////Metadata_language/////////
+								
+								LanguageIdentifier identifier = new LanguageIdentifier(title);
+								String lang=identifier.getLanguage();
+								
+								
+								
+								System.out.print(lang.trim()+"#<>#");
+								
+								
+								
+						//////////Aka/////////
+								System.out.print("#<>#");
+								
+								
+						//////////Production _Country/////////
+								System.out.print("#<>#");
+						
+								
+								
+						///////////Aux_Info////////
+								System.out.print("#<>#");
+								
+								
+								
+						//////////Reference URL/////////
+								System.out.print(url.trim()+"#<>#");
+								
+								
+						//////////Created_At/////////
+								System.out.print("#<>#");
+								
+						//////////Modified_At/////////
+								System.out.print("#<>#");
+								
+						//////////Last _Seen/////////
+								System.out.print("#<>#");
+								
+								
+								
+								
+							}
+							
+							
+						}
+								
+								
+					}
+							
+							
+						}
+					
+				
+		}
+		
+		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				System.out.print("\n");
+				
+				ht.close();
+				resc.close();
+				fos.close();
+				ps.close();
+				
+			}
+			
+			catch(Exception e)
+			{
+				e.getMessage();
+			}
+		}
+		
+		
+		
+	}
+
+
 
 }
