@@ -39,9 +39,12 @@ public class CanalCNT {
 	ResultScanner resc;
 	String rownames=null,family=null,qualifier=null,content=null;
 	
+	CanalMovRich cmr=new CanalMovRich();
+	
+	CanalTVShow ctvs=new CanalTVShow();
+	
 	 
-	 
-	 CanalMovRich cmr=new CanalMovRich();
+	// 
 	
 	public void ContRows()
 	{
@@ -68,6 +71,7 @@ public class CanalCNT {
 						{
 							//System.out.println(" The RowsName are:"+rownames);
 							
+							
 							/// For Movies Details........///
 							
 							if(rownames.contains("/peliculas"))
@@ -82,6 +86,78 @@ public class CanalCNT {
 								
 								
 							}
+							
+						
+							if(rownames.contains("/novelas"))
+							{
+								//System.out.println(rownames);
+								
+								//ImageUrlS();
+								//cmr.ImageUrls(rownames);
+								//ContINTRows(rownames);
+								
+								ctvs.ContTVShow(rownames);
+								ctvs.ContTVShowRM(rownames);
+								
+								
+								
+								
+							}
+							/*
+							
+							if(rownames.contains("/variedades")||rownames.contains("/periodisticos")||rownames.contains("/deportivos"))
+							{
+								System.out.println(rownames);
+								
+								//ImageUrlS();
+								//cmr.ImageUrls(rownames);
+								new CanalCNT().ContINTRows(rownames);
+								
+								//ctvs.ContTVShow(rownames);
+								//ctvs.ContTVShowRM(rownames);
+								
+								
+								
+								
+							}
+							
+							
+							
+							if(rownames.contains("/periodisticos"))
+							{
+								System.out.println(rownames);
+								
+								//ImageUrlS();
+								//cmr.ImageUrls(rownames);
+								new CanalCNT().ContINTRows(rownames);
+								
+								//ctvs.ContTVShow(rownames);
+								//ctvs.ContTVShowRM(rownames);
+								
+								
+								
+								
+							}
+							
+							
+							if(rownames.contains("/deportivos"))
+							{
+								System.out.println(rownames);
+								
+								//ImageUrlS();
+								//cmr.ImageUrls(rownames);
+								new CanalCNT().ContINTRows(rownames);
+								
+								//ctvs.ContTVShow(rownames);
+								//ctvs.ContTVShowRM(rownames);
+								
+								
+								
+								
+							}
+							*/
+
+
 							
 							
 							
@@ -127,7 +203,9 @@ public class CanalCNT {
 	public void ContINTRows(String name)
 	{
 		
-		CanalMT mt=new CanalMT();
+		CanalMT mt=new CanalMT();//---------------->
+		
+		//CanalTVShow ctvs=new CanalTVShow();
 		
 		//CanalMovRich cmr=new CanalMovRich();
 		try
@@ -164,8 +242,10 @@ public class CanalCNT {
 							{
 								 
 								
-								mt.QualifierMatch(href);
+								mt.QualifierMatch(href);//------------------->
 								//cmr.QualifierMatch(href);
+								
+								//ctvs.QualifierMatchTv(href);
 							//System.out.println(href);
 							
 							

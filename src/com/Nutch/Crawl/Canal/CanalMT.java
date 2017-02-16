@@ -19,6 +19,9 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import org.apache.tika.language.LanguageIdentifier;
+
+
 
 import us.codecraft.xsoup.Xsoup;
 
@@ -292,13 +295,13 @@ public class CanalMT {
 								
 								String url=Xsoup.compile("//meta[@property='og:url']/@content").evaluate(document).get();
 								Spliturl(url);
-								System.out.print("#<>#"+splitter+"#<>#");
+								System.out.print(splitter.trim()+"#<>#");
 								
 								
 								////////// Title//////////////
 								String title=Xsoup.compile("//meta[@property='og:title']/@content").evaluate(document).get();
 								Splittitle(title);
-								System.out.print(splitter+"#<>#");
+								System.out.print(splitter.trim()+"#<>#");
 								
 								////////// Original Title/////////
 								System.out.print("#<>#");
@@ -311,7 +314,7 @@ public class CanalMT {
 								
 								String descript=Xsoup.compile("//*[@id='slideshow']/div[2]/div/div/text()").evaluate(document).get();
 													
-								System.out.print(descript+"#<>#");
+								System.out.print(descript.trim()+"#<>#");
 								
 						////////// Genres/////////
 								System.out.print("#<>#");
@@ -330,19 +333,30 @@ public class CanalMT {
 								
 								
 						//////////Languages/////////
-								System.out.print("Spanish"+"#<>#");
+								System.out.print("#<>#");
 								
 						//////////Original Languages/////////
 								System.out.print("#<>#");
 								
 								
 						//////////Metadata_language/////////
-								System.out.print("#<>#");
+								
+								LanguageIdentifier identifier = new LanguageIdentifier(title);
+								String lang=identifier.getLanguage();
+								
+								
+								
+								System.out.print(lang.trim()+"#<>#");
 								
 								
 								
 						//////////Aka/////////
 								System.out.print("#<>#");
+								
+								
+						//////////Production _Country/////////
+								System.out.print("#<>#");
+						
 								
 								
 						///////////Aux_Info////////
@@ -351,7 +365,7 @@ public class CanalMT {
 								
 								
 						//////////Reference URL/////////
-								System.out.print(url+"#<>#");
+								System.out.print(url.trim()+"#<>#");
 								
 								
 						//////////Created_At/////////
@@ -365,7 +379,6 @@ public class CanalMT {
 								
 								
 								
-								System.out.println("\n\n");
 								
 							}
 							
@@ -390,6 +403,7 @@ public class CanalMT {
 		{
 			try
 			{
+				System.out.print("\n");
 				
 				ht.close();
 				resc.close();

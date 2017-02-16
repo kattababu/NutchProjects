@@ -50,6 +50,8 @@ public class CanalMovRich {
 	
 	static FileOutputStream fos =null;
 	static PrintStream ps=null;
+	MSDigest msd=new MSDigest();
+	
 
 	
 	//List<String> list2=null;
@@ -115,6 +117,8 @@ public class CanalMovRich {
 							//System.out.println(rownames);
 							uname=name;
 							imag=imgs;
+							msd.MD5(imag);
+							
 							//ImageUrls542(rownames);
 							
 							
@@ -173,6 +177,8 @@ public class CanalMovRich {
 		{
 			try
 			{
+				//System.lineSeparator();
+				System.out.print("\n");
 				
 				ht.close();
 				resc.close();
@@ -199,27 +205,26 @@ public class CanalMovRich {
 	public void Tabs()
 	{
 ///////////// Image_SK////////////
-		String sk=imag;
-		Spliturl1(sk);
+		//Spliturl1(sk);
 		
-		
-		System.out.print("#<>#"+splitter1.substring(0, splitter1.length()-4)+"#<>#");
+		System.out.print(msd.md5s+"#<>#");
+		//System.out.print(splitter1.substring(0, splitter1.length()-4).trim()+"#<>#");
 		
 		
 		/// Program _SK//////////// Value
 		String p_sk=splitter;
-		System.out.print(p_sk+"#<>#");
+		System.out.print(p_sk.trim()+"#<>#");
 		
 		
 		/////////////Program_Type///////////
-		System.out.print("Movie"+"#<>#");
+		System.out.print("movie"+"#<>#");
 		
 		
 /////////////Media_Type///////////
-		System.out.print("Image"+"#<>#");
+		System.out.print("image"+"#<>#");
 		
 /////////////Image_Type///////////
-		System.out.print("Medium"+"#<>#");
+		System.out.print("small"+"#<>#");
 		
 /////////////Size///////////
 		System.out.print("#<>#");
@@ -231,11 +236,11 @@ public class CanalMovRich {
 		
 		
 /////////////Image_URL///////////
-		System.out.print(imag+"#<>#");
+		System.out.print(imag.trim()+"#<>#");
 		
 		
 /////////////Reference_url///////////
-		System.out.print(uname+"#<>#");
+		System.out.print(uname.trim()+"#<>#");
 		
 		
 ///////////Aux_Info////////
@@ -251,8 +256,8 @@ public class CanalMovRich {
 		System.out.print("#<>#");
 		
 		
+		//System.lineSeparator();
 		
-		System.out.println("\n\n");
 
 
 		
