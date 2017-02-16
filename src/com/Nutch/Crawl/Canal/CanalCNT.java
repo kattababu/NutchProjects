@@ -39,7 +39,9 @@ public class CanalCNT {
 	ResultScanner resc;
 	String rownames=null,family=null,qualifier=null,content=null;
 	
-	static String title=null;
+	 
+	 
+	 CanalMovRich cmr=new CanalMovRich();
 	
 	public void ContRows()
 	{
@@ -71,7 +73,14 @@ public class CanalCNT {
 							if(rownames.contains("/peliculas"))
 							{
 								//System.out.println(rownames);
+								
+								//ImageUrlS();
+								cmr.ImageUrls(rownames);
 								ContINTRows(rownames);
+								
+								
+								
+								
 							}
 							
 							
@@ -117,8 +126,10 @@ public class CanalCNT {
 	
 	public void ContINTRows(String name)
 	{
-		//int i=1;
+		
 		CanalMT mt=new CanalMT();
+		
+		//CanalMovRich cmr=new CanalMovRich();
 		try
 		{
 			
@@ -143,33 +154,8 @@ public class CanalCNT {
 						//System.out.println(content);
 						 Document document = Jsoup.parse(content);
 						 
-						 /*
-						 List<String> list2 =Xsoup.compile("//div[@class='lista']/a/div[@class='titulo']/text()").evaluate(document).list();
-							for(String title1:list2)
-							{
-								if(title1!=null)
-								{
-									title=title1;
-									
-									
-								//System.out.println(title);
-								//mt.QualifierMatch(href);
-								//
-								}
-								
-							}
-							*/
-
-						 
-						 
-						 
+												 
 						List<String> list =Xsoup.compile("//div[@class='lista']/a/@href").evaluate(document).list();
-						//List<String> list2 =Xsoup.compile("//div[@class='lista']/a/div[@class='titulo']/text()").evaluate(document).list();
-						
-						//String a=list.iterator().;
-						//System.out.println(a);
-						
-						//Xsoup.select(element, list)
 						for(String href:list)
 						{
 							
@@ -179,6 +165,7 @@ public class CanalCNT {
 								 
 								
 								mt.QualifierMatch(href);
+								//cmr.QualifierMatch(href);
 							//System.out.println(href);
 							
 							
@@ -187,30 +174,19 @@ public class CanalCNT {
 							
 							
 						}
-						/*
-						List<String> list2 =Xsoup.compile("//div[@class='lista']/a/div[@class='titulo']/text()").evaluate(document).list();
-						for(String title1:list2)
-						{
-							if(title1!=null)
-							{
-								title=title1;
-							//System.out.println(title);
-							//mt.QualifierMatch(href);
-							//
-							}
-							
+						
+						//////////////////
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						}
-						*/
-					
-						
-						
-						
-						
-						
-						
-						
-						//System.out.println(document);
-					}
 					
 				}
 			}
@@ -245,10 +221,11 @@ public class CanalCNT {
 		
 	}
 	
-	
-
-	
+	///////////////////////////   For Image///////////////////
 	
 	
-
+	
+	
+								
+								
 }

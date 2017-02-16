@@ -3,7 +3,7 @@
  */
 package com.Nutch.Crawl.Canal;
 
-import java.util.List;
+
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -15,7 +15,7 @@ import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+
 
 import us.codecraft.xsoup.Xsoup;
 
@@ -343,65 +343,7 @@ public class CanalMT {
 								
 								System.out.println("\n\n");
 								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								//System.out.println(rownames);
 							}
-							
-							/*
-							content=Bytes.toString(kv.getValue());
-							
-							
-							System.out.println(content);
-							
-							System.out.println(rownames);
-							
-							
-							
-							
-							 Document document = Jsoup.parse(content);
-							 Element el=document.head();
-							 
-							 String sk=splitter;
-								System.out.println("SK VAlue:"+sk);
-								//// 
-								
-								
-								
-								//System.out.println("Title:"+CanalCNT.title);
-								//
-							// System.out.println(document);
-							//meta[@property="og:title"]/@content
-							 
-							String title=Xsoup.compile("//meta[@property='og:title']/@content").evaluate(el).get();
-							System.out.println(title);
-							*/
-							
-						
 							
 							
 						}
@@ -413,11 +355,6 @@ public class CanalMT {
 						}
 					
 				
-			
-			
-			
-			
-			
 		}
 		
 		
