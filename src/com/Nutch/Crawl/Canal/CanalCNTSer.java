@@ -3,10 +3,9 @@
  */
 package com.Nutch.Crawl.Canal;
 
-
-
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -16,12 +15,9 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.apache.tika.language.LanguageIdentifier;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
-import org.apache.tika.language.LanguageIdentifier;
-
-
 
 import us.codecraft.xsoup.Xsoup;
 
@@ -29,12 +25,12 @@ import us.codecraft.xsoup.Xsoup;
  * @author surendra
  *
  */
-public class CanalMT {
+public class CanalCNTSer {
 
 	/**
 	 * 
 	 */
-	public CanalMT() {
+	public CanalCNTSer() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -42,18 +38,227 @@ public class CanalMT {
 	Scan sc=null;
 	ResultScanner resc;
 	String rownames=null,family=null,qualifier=null,content=null,splitter=null;
-	
 	static FileOutputStream fos =null;
 	static PrintStream ps=null;
-
 	
-	static 	{
+	CanalRMPeriod crmp=new CanalRMPeriod();
+	
+	
+	CanalTVShow ctvs=new CanalTVShow();
+	
+	
+	 
+	// 
+	
+	public void ContRowsSer()
+	{
+		try
+		{
+			
+			//fos = new FileOutputStream(FileStore.fileTvshow,true);
+			//ps = new PrintStream(fos);
+			 // System.setOut(ps);
+			
+			
+			Configuration config=HBaseConfiguration.create();
+			ht=new HTable(config,"canal_webpage");
+			sc=new Scan();
+			resc=ht.getScanner(sc);
+			for(Result res = resc.next(); (res != null); res=resc.next())
+			{
+				for(KeyValue kv:res.list())
+				{
+					
+					rownames=Bytes.toString(kv.getRow());
+					family=Bytes.toString(kv.getFamily());
+					qualifier=Bytes.toString(kv.getQualifier());
+					
+					
+					if(family.equals("il"))
+					{
+						if(qualifier.equals("http://www.canal10.com.ni/"))
+						{
+							//System.out.println(" The RowsName are:"+rownames);
+							
+							
+							/////////////////  TVSHows////////////////////
+							
+						
+							if(rownames.contains("/series"))
+							{
+								//System.out.println(rownames);
+								
+								
+								ctvs.ContTVShowSer(rownames);
+								ctvs.ContTVShowSerRM(rownames);
+								
+							}
+							
+							
+							if(rownames.contains("/periodisticos"))
+							{
+								//System.out.println(rownames);
+								
+								crmp.ImageUrlsPeriod(rownames);
+								
+								ContINTRowsPer(rownames);
+								
+								
+								
+								//ctvs.ContTVShowSer(rownames);
+								//ctvs.ContTVShowSerRM(rownames);
+								
+							}
+							
+						}
+					}
+				}
+			}
+			
+			
+			
+			
+		}
+		
+		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
 				
-				FileStore.MovieTable("movie");
-		 }
-
+				ht.close();
+				resc.close();
+				ps.flush();
+				ps.close();
+				
+				fos.close();
+				
+				
+			}
+			
+			catch(Exception e)
+			{
+				e.getMessage();
+			}
+		}
+		
+		
+		
+	}
 	
-	public void QualifierMatch(String name)
+	
+	/////////////////////////////// PERIODICS/////////////////
+	
+	
+	public void ContINTRowsPer(String name)
+	{
+		
+		
+		//CanalTVShow ctvs=new CanalTVShow();
+		
+		//CanalMovRich cmr=new CanalMovRich();
+		try
+		{
+			
+			Configuration config=HBaseConfiguration.create();
+			ht=new HTable(config,"canal_webpage");
+			sc=new Scan();
+			resc=ht.getScanner(sc);
+			for(Result res = resc.next(); (res != null); res=resc.next())
+			{
+				for(KeyValue kv:res.list())
+				{
+					
+					rownames=Bytes.toString(kv.getRow());
+					family=Bytes.toString(kv.getFamily());
+					qualifier=Bytes.toString(kv.getQualifier());
+					
+					if(rownames.equals(name))
+					{
+					
+						content=Bytes.toString(kv.getValue());
+											
+						//System.out.println(content);
+						 Document document = Jsoup.parse(content);
+						 
+												 
+						List<String> list =Xsoup.compile("//div[@class='lista']/a/@href").evaluate(document).list();
+						for(String href:list)
+						{
+							
+							
+							if(href!=null)
+							{
+								 
+								
+								//mt.QualifierMatch(href);//------------------->
+								//cmr.QualifierMatch(href);
+								
+								QualifierMatchPer(href);
+							//System.out.println(href);
+							
+							
+														//
+							}
+							
+							
+						}
+						
+						//////////////////
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						}
+					
+				}
+			}
+			
+			
+			
+			
+		}
+		
+		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				
+				ht.close();
+				resc.close();
+				
+			}
+			
+			catch(Exception e)
+			{
+				e.getMessage();
+			}
+		}
+		
+		
+		
+	}
+	
+	
+	///////////////////////////////////////
+	
+	
+	public void QualifierMatchPer(String name)
 	{
 		try
 		{
@@ -71,36 +276,38 @@ public class CanalMT {
 					family=Bytes.toString(kv.getFamily());
 					qualifier=Bytes.toString(kv.getQualifier());
 					
-					
 					if(family.equals("ol"))
 					{
+					
 					if(qualifier.equals(name))
 					{
 						
 						Spliturl(name);
+						//System.out.println(qualifier);
 						
-						if(rownames.contains(splitter))
+						if(rownames.contains(splitter) && rownames.endsWith(splitter))
 						{
 							
 						
+							CanalTVDataPer(rownames);
 							
 							//content=Bytes.toString(kv.getValue());
 							//System.out.println(rownames);
-							CanalMovieCNT(rownames);
+							//CanalMovieCNT(rownames);
 							//String sk=splitter;
 							//System.out.println("SK VAlue:"+sk);
 							//System.out.println("Title:"+CanalCNT.title);
 							
 							
-							
-							
+						
+						}
 							 
 							
-						}
+						
 								
 								
 					}
-							
+						
 							
 						}
 					}
@@ -138,92 +345,24 @@ public class CanalMT {
 	}
 	
 	
-	///////////////////////////////////////// Movie Content////////////////////////
-	
-	
-	
-	public void CanalMovieCNT(String name)
+	public void Spliturl(String name)
 	{
-		
-		//CanalCNT cnt=new CanalCNT();
-		
-		try
-		{
-			
-			Configuration config=HBaseConfiguration.create();
-			ht=new HTable(config,"canal_webpage");
-			sc=new Scan();
-			resc=ht.getScanner(sc);
-			for(Result res = resc.next(); (res != null); res=resc.next())
-			{
-				for(KeyValue kv:res.list())
-				{
-					
-					rownames=Bytes.toString(kv.getRow());
-					family=Bytes.toString(kv.getFamily());
-					qualifier=Bytes.toString(kv.getQualifier());
-					
-					
-					if(family.equals("il"))
-					{
-					
-					
-						if(rownames.equals(name))
-						{
-						
-							
-							CanalMovieData(rownames);
-							
-							
-						}
-							
-							
-						}
-								
-								
-					}
-							
-							
-						}
-					
-				
-			
-			
-			
-			
-			
-		}
-		
-		
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
-				
-				ht.close();
-				resc.close();
-				
-			}
-			
-			catch(Exception e)
-			{
-				e.getMessage();
-			}
-		}
-		
-		
-		
+		String[] split=name.split("\\/");
+		splitter=split[split.length - 1];
+		//System.out.println(splitter);
 	}
+	
+	
+	////////////////////////////////
+	
+	
+	
 ///////////////////////////////////////////////////////////
 	
 	
 	
 	
-	public void CanalMovieData(String name)
+	public void CanalTVDataPer(String name)
 	{
 		
 		//CanalCNT cnt=new CanalCNT();
@@ -231,7 +370,7 @@ public class CanalMT {
 		try
 		{
 			
-			fos = new FileOutputStream(FileStore.fileM,true);
+			fos = new FileOutputStream(FileStore.fileTvshow,true);
 			ps = new PrintStream(fos);
 			   System.setOut(ps);
 			
@@ -343,6 +482,7 @@ public class CanalMT {
 								
 						//////////Last _Seen/////////
 								System.out.print("#<>#");
+								System.out.print("\n");
 								
 								
 								
@@ -370,7 +510,7 @@ public class CanalMT {
 		{
 			try
 			{
-				System.out.print("\n");
+				//System.out.print("\n");
 				
 				ht.close();
 				resc.close();
@@ -388,21 +528,14 @@ public class CanalMT {
 		
 		
 	}
-
-	
-	
-	public void Spliturl(String name)
-	{
-		String[] split=name.split("\\/");
-		splitter=split[split.length - 1];
-		//System.out.println(splitter);
-	}
 	public void Splittitle(String name)
 	{
 		String[] split=name.split("\\-");
 		splitter=split[split.length - 2];
 		//System.out.println(splitter);
 	}
+
+	
 	
 	
 

@@ -59,7 +59,7 @@ public class CanalTvshowRM {
 			
 			fos = new FileOutputStream(FileStore.fileRM,true);
 			ps = new PrintStream(fos);
-			   System.setOut(ps);
+			  System.setOut(ps);
 			
 			
 			Configuration config=HBaseConfiguration.create();
@@ -76,7 +76,7 @@ public class CanalTvshowRM {
 					qualifier=Bytes.toString(kv.getQualifier());
 					
 					
-					if(family.equals("il"))
+					if(family.equals("ol"))
 					{
 						
 						//System.out.println("External"+rownames);
@@ -91,7 +91,7 @@ public class CanalTvshowRM {
 						
 						
 						
-						if(rownames.contains(splitter))
+						if(rownames.contains(splitter) && rownames.endsWith(splitter))
 						{
 							
 						

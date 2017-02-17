@@ -75,7 +75,7 @@ CanalMovRich cmr=new CanalMovRich();
 							//System.out.println(" The RowsName are:"+rownames);
 							
 							
-							/*
+							
 							/// For Movies Details........///
 							
 							if(rownames.contains("/peliculas"))
@@ -90,6 +90,8 @@ CanalMovRich cmr=new CanalMovRich();
 								
 								
 							}
+							
+							
 							/////////////////  TVSHows////////////////////
 						
 							if(rownames.contains("/novelas"))
@@ -102,11 +104,21 @@ CanalMovRich cmr=new CanalMovRich();
 								
 								ctvs.ContTVShow(rownames);
 								ctvs.ContTVShowRM(rownames);
+								//ctvs.ContTVShowSer(rownames);
+								//ctvs.ContTVShowSerRM(rownames);
+								
 								
 								
 								
 								
 							}
+							
+							
+							
+								
+							
+							
+							
 							
 							
 							
@@ -129,10 +141,10 @@ CanalMovRich cmr=new CanalMovRich();
 								
 								
 							}
-							*/
-							
 							
 							/*
+							
+							
 							if(rownames.contains("/periodisticos"))
 							{
 								System.out.println(rownames);
@@ -150,25 +162,7 @@ CanalMovRich cmr=new CanalMovRich();
 							}
 							*/
 							
-							if(rownames.contains("/series"))
-							{
-								System.out.println(rownames);
-								
-								//ImageUrlS();
-								//cmr.ImageUrls(rownames);
-								//new CanalCNT().ContINTRows(rownames);
-								
-								//ctvs.ContTVShow(rownames);
-								//ctvs.ContTVShowRM(rownames);
-								
-								
-								
-								
-							}
-							
-
-
-							
+														
 							
 							
 						}
@@ -411,6 +405,10 @@ CanalMovRich cmr=new CanalMovRich();
 		
 		
 	}
+	
+	
+	
+
 	
 	
 	
