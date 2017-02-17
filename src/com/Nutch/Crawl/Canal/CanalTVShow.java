@@ -48,7 +48,7 @@ public class CanalTVShow {
 	static FileOutputStream fos =null;
 	static PrintStream ps=null;
 	
-	/*
+	
 
 	
 	
@@ -63,7 +63,7 @@ public class CanalTVShow {
 			 }
 
 	
-	*/
+	
 
 
 	
@@ -194,25 +194,12 @@ public class CanalTVShow {
 						//////////Last _Seen/////////
 								System.out.print("#<>#");
 								
-								
-								
-								
-
-							
-														//
+								System.out.print("\n");
+										
 							}
 							
 							
 						}
-						
-						//////////////////
-						
-						
-						
-						
-						
-						
-						
 						
 						
 						
@@ -235,7 +222,7 @@ public class CanalTVShow {
 		{
 			try
 			{
-				System.out.print("\n");
+				
 				ht.close();
 				resc.close();
 				fos.close();
@@ -580,7 +567,7 @@ public class CanalTVShow {
 						{
 						
 							
-							System.out.println(rownames);
+							//System.out.println(rownames);
 							CanalTvshowData(rownames);
 							
 							
@@ -640,9 +627,9 @@ public class CanalTVShow {
 		try
 		{
 			
-			//fos = new FileOutputStream(FileStore.fileM,true);
-			//ps = new PrintStream(fos);
-			  // System.setOut(ps);
+			fos = new FileOutputStream(FileStore.fileTvshow,true);
+			ps = new PrintStream(fos);
+			  System.setOut(ps);
 			
 			
 			

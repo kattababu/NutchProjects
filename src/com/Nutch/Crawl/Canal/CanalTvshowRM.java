@@ -52,14 +52,14 @@ public class CanalTvshowRM {
 	
 	
 	
-	public void QualifierMatch(String name,String imgs)
+	public void QualifierMatchTVRM(String name,String imgs)
 	{
 		try
 		{
 			
-			//fos = new FileOutputStream(FileStore.fileRM,true);
-			//ps = new PrintStream(fos);
-			   //System.setOut(ps);
+			fos = new FileOutputStream(FileStore.fileRM,true);
+			ps = new PrintStream(fos);
+			   System.setOut(ps);
 			
 			
 			Configuration config=HBaseConfiguration.create();
@@ -76,7 +76,7 @@ public class CanalTvshowRM {
 					qualifier=Bytes.toString(kv.getQualifier());
 					
 					
-					if(family.equals("ol"))
+					if(family.equals("il"))
 					{
 						
 						//System.out.println("External"+rownames);
@@ -108,6 +108,7 @@ public class CanalTvshowRM {
 							
 							Tabs();
 							
+							
 							 
 							
 						}
@@ -136,7 +137,7 @@ public class CanalTvshowRM {
 			try
 			{
 				//System.lineSeparator();
-				System.out.print("\n");
+				
 				
 				ht.close();
 				resc.close();
@@ -163,7 +164,7 @@ public class CanalTvshowRM {
 	public void Tabs()
 	{
 ///////////// Image_SK////////////
-		//Spliturl1(sk);
+		
 		
 		System.out.print(msd.md5s+"#<>#");
 		//System.out.print(splitter1.substring(0, splitter1.length()-4).trim()+"#<>#");
@@ -175,7 +176,7 @@ public class CanalTvshowRM {
 		
 		
 		/////////////Program_Type///////////
-		System.out.print("movie"+"#<>#");
+		System.out.print("tvshow"+"#<>#");
 		
 		
 /////////////Media_Type///////////
@@ -187,7 +188,9 @@ public class CanalTvshowRM {
 /////////////Size///////////
 		System.out.print("#<>#");
 /////////////Dimensions///////////
-		System.out.print("#<>#");
+		
+		
+			System.out.print("#<>#");
 		
 /////////////Description///////////
 		System.out.print("#<>#");
@@ -212,6 +215,7 @@ public class CanalTvshowRM {
 		
 //////////Last _Seen/////////
 		System.out.print("#<>#");
+		System.out.print("\n");
 		
 		
 		//System.lineSeparator();
@@ -232,9 +236,9 @@ public class CanalTvshowRM {
 	
 	
 	
-	public void ImageUrls(String name)
+	public void ImageUrlsTV(String name)
 	{
-		
+	
 		
 		
 		//CanalMovRich cmr=new CanalMovRich();
@@ -284,7 +288,7 @@ public class CanalTvshowRM {
 								  
 								  //System.out.println(imgs);
 							  }
-							  QualifierMatch(attrh,imgs);
+							  QualifierMatchTVRM(attrh,imgs);
 							  
 							  
 						  }
@@ -379,7 +383,7 @@ public class CanalTvshowRM {
 	
 	public void Spliturl1(String name)
 	{
-		String[] split=name.split("\\/");
+		String[] split=name.split("\\_|\\-");
 		splitter1=split[split.length - 1];
 		//System.out.println(splitter);
 	}

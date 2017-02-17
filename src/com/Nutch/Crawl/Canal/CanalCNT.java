@@ -39,10 +39,11 @@ public class CanalCNT {
 	ResultScanner resc;
 	String rownames=null,family=null,qualifier=null,content=null;
 	
-//	CanalMovRich cmr=new CanalMovRich();
+CanalMovRich cmr=new CanalMovRich();
 	
 	CanalTVShow ctvs=new CanalTVShow();
-	//CanalMT mt=new CanalMT();//---------------->
+	CanalTvshowRM ctsrm=new CanalTvshowRM();
+	CanalMT mt=new CanalMT();//---------------->
 	
 	
 	 
@@ -107,7 +108,7 @@ public class CanalCNT {
 								
 							}
 							
-							*/
+							
 							
 							
 							if(rownames.contains("/variedades")||rownames.contains("/deportivos"))
@@ -116,7 +117,10 @@ public class CanalCNT {
 								
 								//ImageUrlS();
 								//cmr.ImageUrls(rownames);
-								new CanalCNT().ContINTRows(rownames);
+								ctsrm.ImageUrlsTV(rownames);
+								new CanalCNT().ContINTRowsTV(rownames);
+								
+								
 								
 								//ctvs.ContTVShow(rownames);
 								//ctvs.ContTVShowRM(rownames);
@@ -125,6 +129,7 @@ public class CanalCNT {
 								
 								
 							}
+							*/
 							
 							
 							/*
@@ -143,15 +148,15 @@ public class CanalCNT {
 								
 								
 							}
+							*/
 							
-							
-							if(rownames.contains("/deportivos"))
+							if(rownames.contains("/series"))
 							{
 								System.out.println(rownames);
 								
 								//ImageUrlS();
 								//cmr.ImageUrls(rownames);
-								new CanalCNT().ContINTRows(rownames);
+								//new CanalCNT().ContINTRows(rownames);
 								
 								//ctvs.ContTVShow(rownames);
 								//ctvs.ContTVShowRM(rownames);
@@ -160,7 +165,7 @@ public class CanalCNT {
 								
 								
 							}
-							*/
+							
 
 
 							
@@ -206,6 +211,108 @@ public class CanalCNT {
 	
 	
 	public void ContINTRows(String name)
+	{
+		
+		
+		//CanalTVShow ctvs=new CanalTVShow();
+		
+		//CanalMovRich cmr=new CanalMovRich();
+		try
+		{
+			
+			Configuration config=HBaseConfiguration.create();
+			ht=new HTable(config,"canal_webpage");
+			sc=new Scan();
+			resc=ht.getScanner(sc);
+			for(Result res = resc.next(); (res != null); res=resc.next())
+			{
+				for(KeyValue kv:res.list())
+				{
+					
+					rownames=Bytes.toString(kv.getRow());
+					family=Bytes.toString(kv.getFamily());
+					qualifier=Bytes.toString(kv.getQualifier());
+					
+					if(rownames.equals(name))
+					{
+					
+						content=Bytes.toString(kv.getValue());
+											
+						//System.out.println(content);
+						 Document document = Jsoup.parse(content);
+						 
+												 
+						List<String> list =Xsoup.compile("//div[@class='lista']/a/@href").evaluate(document).list();
+						for(String href:list)
+						{
+							
+							
+							if(href!=null)
+							{
+								 
+								
+								mt.QualifierMatch(href);//------------------->
+								//cmr.QualifierMatch(href);
+								
+								//ctvs.QualifierMatchTv(href);
+							//System.out.println(href);
+							
+							
+														//
+							}
+							
+							
+						}
+						
+						//////////////////
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						}
+					
+				}
+			}
+			
+			
+			
+			
+		}
+		
+		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				
+				ht.close();
+				resc.close();
+				
+			}
+			
+			catch(Exception e)
+			{
+				e.getMessage();
+			}
+		}
+		
+		
+		
+	}
+	
+	///////////////////////////   For Image///////////////////
+	
+	public void ContINTRowsTV(String name)
 	{
 		
 		
@@ -304,9 +411,6 @@ public class CanalCNT {
 		
 		
 	}
-	
-	///////////////////////////   For Image///////////////////
-	
 	
 	
 	
