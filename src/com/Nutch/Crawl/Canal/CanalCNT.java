@@ -123,7 +123,7 @@ CanalMovRich cmr=new CanalMovRich();
 							
 							
 							
-							if(rownames.contains("/variedades")||rownames.contains("/deportivos"))
+							if(rownames.contains("/variedades")||rownames.contains("/deportivos")||rownames.contains("/periodisticos"))
 							{
 								//System.out.println(rownames);
 								

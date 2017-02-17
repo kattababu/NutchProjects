@@ -94,7 +94,7 @@ public class CanalCNTSer {
 								
 							}
 							
-							
+							/*
 							if(rownames.contains("/periodisticos"))
 							{
 								//System.out.println(rownames);
@@ -110,6 +110,7 @@ public class CanalCNTSer {
 								
 							}
 							
+							*/
 						}
 					}
 				}
@@ -132,7 +133,7 @@ public class CanalCNTSer {
 				
 				ht.close();
 				resc.close();
-				ps.flush();
+				//ps.flush();
 				ps.close();
 				
 				fos.close();

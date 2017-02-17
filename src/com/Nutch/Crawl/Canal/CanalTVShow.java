@@ -225,7 +225,7 @@ public class CanalTVShow {
 				
 				ht.close();
 				resc.close();
-				ps.flush();
+				//ps.flush();
 				fos.close();
 				ps.close();
 				
@@ -403,7 +403,7 @@ public class CanalTVShow {
 				
 				ht.close();
 				resc.close();
-				ps.flush();
+				//ps.flush();
 				fos.close();
 				ps.close();
 				
@@ -591,7 +591,7 @@ public class CanalTVShow {
 				
 				ht.close();
 				resc.close();
-				ps.flush();
+				//ps.flush();
 				fos.close();
 				ps.close();
 				
@@ -777,7 +777,7 @@ public class CanalTVShow {
 				
 				ht.close();
 				resc.close();
-				ps.flush();
+				//ps.flush();
 				fos.close();
 				ps.close();
 				
