@@ -53,12 +53,7 @@ public class CanalTVShow {
 	
 	
 	static 	{
-			//	Date date = new Date() ;
-			//	   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmssSSSSSS") ;
-				 //long time = System.currentTimeMillis();
-					
-			//		file= new File("/katta/ActionHBO/ACTHBOMV_"+dateFormat.format(date)+".txt"); //Your file
-					
+						
 					FileStore.TVShowTable("Tvshow");
 			 }
 
@@ -619,7 +614,7 @@ public class CanalTVShow {
 			
 			fos = new FileOutputStream(FileStore.fileRM,true);
 			ps = new PrintStream(fos);
-			   System.setOut(ps);
+			  System.setOut(ps);
 			
 			
 			MSDigest msd=new MSDigest();
@@ -844,6 +839,8 @@ public class CanalTVShow {
 						
 						Spliturl(name);
 						
+						//System.out.println("The RowNames:"+rownames);
+						
 					
 						if(rownames.contains(splitter) && rownames.endsWith(splitter))
 						{
@@ -853,13 +850,14 @@ public class CanalTVShow {
 							//content=Bytes.toString(kv.getValue());
 							//System.out.println(rownames);
 							CanalTvshowData(rownames);
-							//CanalTvShowCNT(rownames);
+							//CanalTvShowCNTEps(rownames);
 							
 							
 							
 							 
 							
 						}
+						
 						
 								
 								
@@ -903,11 +901,11 @@ public class CanalTVShow {
 	
 	
 	////////////////////////////////////////////
+	
+	
 	/*
 	
-	
-	
-	public void CanalTvShowCNT(String name)
+	public void CanalTvShowCNTEps(String name)
 	{
 		
 		//CanalCNT cnt=new CanalCNT();
@@ -929,23 +927,15 @@ public class CanalTVShow {
 					qualifier=Bytes.toString(kv.getQualifier());
 					
 					
-					if(family.equals("il"))
+					if(rownames.equals(name))
 					{
 					
-					
-						if(rownames.equals(name) && !rownames.contains("/noticias/"))
+						if(family.equals("f") && qualifier.equals("cnt"))
 						{
-						
-							
-							System.out.println(rownames);
-							//CanalTvshowData(rownames);
-							
-							
+							content=Bytes.toString(kv.getValue());
+							Document document = Jsoup.parse(content);
 						}
-							
-							
-						}
-								
+					}
 								
 					}
 							
@@ -985,9 +975,9 @@ public class CanalTVShow {
 		
 	}
 	
-	*/
 	
-
+	
+*/
 
 	
 	////////////////////////////////////////// TVShows DataView/////////////////////////
@@ -1025,6 +1015,7 @@ public class CanalTVShow {
 						if(rownames.equals(name))
 						{
 						
+							System.out.println(name);
 							if(family.equals("f") && qualifier.equals("cnt"))
 							{
 								content=Bytes.toString(kv.getValue());

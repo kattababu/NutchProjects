@@ -123,13 +123,13 @@ CanalMovRich cmr=new CanalMovRich();
 							
 							
 							
-							if(rownames.contains("/variedades")||rownames.contains("/deportivos")||rownames.contains("/periodisticos"))
+							if(rownames.contains("/variedades")||rownames.contains("/deportivos"))
 							{
 								//System.out.println(rownames);
 								
 								//ImageUrlS();
 								//cmr.ImageUrls(rownames);
-								ctsrm.ImageUrlsTV(rownames);
+								//ctsrm.ImageUrlsTV(rownames);
 								new CanalCNT().ContINTRowsTV(rownames);
 								
 								
@@ -350,8 +350,8 @@ CanalMovRich cmr=new CanalMovRich();
 								//mt.QualifierMatch(href);//------------------->
 								//cmr.QualifierMatch(href);
 								
-								ctvs.QualifierMatchTv(href);
-							//System.out.println(href);
+								//ctvs.QualifierMatchTv(href);
+							System.out.println(href);
 							
 							
 														//

@@ -40,7 +40,7 @@ public class Sample {
 				family=Bytes.toString(kv.getFamily());
 				qualifier=Bytes.toString(kv.getQualifier());
 				
-				if(rownames.equals("ni.com.canal10.www:http/programa/micro-noticiero-accion-10"))
+				if(rownames.equals("ni.com.canal10.www:http/programa/accion-10-en-la-manana"))
 				{
 					if(family.equals("f") && qualifier.equals("cnt"))
 					{
