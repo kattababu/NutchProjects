@@ -3,8 +3,6 @@
  */
 package com.Nutch.Crawl.Canal;
 
-
-
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 
@@ -16,12 +14,9 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.apache.tika.language.LanguageIdentifier;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
-import org.apache.tika.language.LanguageIdentifier;
-
-
 
 import us.codecraft.xsoup.Xsoup;
 
@@ -29,122 +24,29 @@ import us.codecraft.xsoup.Xsoup;
  * @author surendra
  *
  */
-public class CanalMT {
+public class CanalEpsiode {
 
 	/**
 	 * 
 	 */
-	public CanalMT() {
+	public CanalEpsiode() {
 		// TODO Auto-generated constructor stub
 	}
-	
 	HTable ht=null;
 	Scan sc=null;
 	ResultScanner resc;
-	String rownames=null,family=null,qualifier=null,content=null,splitter=null;
-	
+	String rownames=null,family=null,qualifier=null,content=null,splitter=null,splitterEps=null,splitterEno=null;
 	static FileOutputStream fos =null;
 	static PrintStream ps=null;
-
-	
 	static 	{
-				
-				FileStore.MovieTable("movie");
-		 }
+		
+		FileStore.EpsiodeTable("episode");
+ }
 
 	
-	public void QualifierMatch(String name)
-	{
-		try
-		{
-			
-			Configuration config=HBaseConfiguration.create();
-			ht=new HTable(config,"canal_webpage");
-			sc=new Scan();
-			resc=ht.getScanner(sc);
-			for(Result res = resc.next(); (res != null); res=resc.next())
-			{
-				for(KeyValue kv:res.list())
-				{
-					
-					rownames=Bytes.toString(kv.getRow());
-					family=Bytes.toString(kv.getFamily());
-					qualifier=Bytes.toString(kv.getQualifier());
-					
-					
-					if(family.equals("ol"))
-					{
-					if(qualifier.equals(name))
-					{
-						
-						Spliturl(name);
-						
-						if(rownames.contains(splitter))
-						{
-							
-							CanalMovieData(rownames);
-							
-							//content=Bytes.toString(kv.getValue());
-							//System.out.println(rownames);
-							//CanalMovieCNT(rownames);
-							//String sk=splitter;
-							//System.out.println("SK VAlue:"+sk);
-							//System.out.println("Title:"+CanalCNT.title);
-							
-							
-							
-							
-							 
-							
-						}
-								
-								
-					}
-							
-							
-						}
-					}
-				}
-			
-			
-			
-			
-			
-		}
-		
-		
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
-				
-				ht.close();
-				resc.close();
-				
-			}
-			
-			catch(Exception e)
-			{
-				e.getMessage();
-			}
-		}
-		
-		
-		
-	}
 	
 	
-	
-///////////////////////////////////////////////////////////
-	
-	
-	
-	
-	public void CanalMovieData(String name)
+	public void CanalEPSDataPer(String name)
 	{
 		
 		//CanalCNT cnt=new CanalCNT();
@@ -152,7 +54,7 @@ public class CanalMT {
 		try
 		{
 			
-			fos = new FileOutputStream(FileStore.fileM,true);
+			fos = new FileOutputStream(FileStore.fileTvshowEps,true);
 			ps = new PrintStream(fos);
 			   System.setOut(ps);
 			
@@ -177,19 +79,44 @@ public class CanalMT {
 						
 							if(family.equals("f") && qualifier.equals("cnt"))
 							{
+									
+								//System.out.println(rownames);
+								
+								
+
+								
 								content=Bytes.toString(kv.getValue());
 								Document document = Jsoup.parse(content);
 								////////// SK Value//////////////
 								
 								String url=Xsoup.compile("//meta[@property='og:url']/@content").evaluate(document).get();
+								//System.out.println(url);
+								
 								Spliturl(url);
 								System.out.print(splitter.trim()+"#<>#");
+								
+								//////////////////////  Season_Sk//////////////
+								
+								System.out.print("#<>#");
+								
+								//////////////////////  TvShow_Sk//////////////
+								SpliturlEps(url);
+								
+								System.out.print(splitterEps.trim()+"#<>#");
+								
+								
+								
 								
 								
 								////////// Title//////////////
 								String title=Xsoup.compile("//meta[@property='og:title']/@content").evaluate(document).get();
 								Splittitle(title);
 								System.out.print(splitter.trim()+"#<>#");
+								
+								
+								////////// Show Title/////////
+								System.out.print("#<>#");
+								
 								
 								////////// Original Title/////////
 								System.out.print("#<>#");
@@ -200,9 +127,19 @@ public class CanalMT {
 						
 								/////// Description///////////////
 								
-								String descript=Xsoup.compile("//*[@id='slideshow']/div[2]/div/div/text()").evaluate(document).get();
+								String descript=Xsoup.compile("//div[@class='texto']//text()").evaluate(document).get();
 													
 								System.out.print(descript.trim()+"#<>#");
+								
+								
+						////////// Episode Number/////////
+								SplitEpsNo(url);
+								System.out.print(splitterEno+"#<>#");
+								
+						////////// Season_Number/////////
+								System.out.print("#<>#");
+						
+						
 								
 						////////// Genres/////////
 								System.out.print("#<>#");
@@ -264,18 +201,23 @@ public class CanalMT {
 								
 						//////////Last _Seen/////////
 								System.out.print("#<>#");
+								System.out.print("\n");
+								
+
+								//INLINKSPer(rownames);
 								
 								
 								
-								
+
 							}
 							
 							
-						}
+						
 								
 								
 					}
-							
+						
+				}
 							
 						}
 					
@@ -291,7 +233,7 @@ public class CanalMT {
 		{
 			try
 			{
-				System.out.print("\n");
+				//System.out.print("\n");
 				
 				ht.close();
 				resc.close();
@@ -311,13 +253,12 @@ public class CanalMT {
 	}
 
 	
-	
-	public void Spliturl(String name)
+	public void SplitEpsNo(String name)
 	{
-		String[] split=name.split("\\/");
-		splitter=split[split.length - 1];
+		String[] split=name.split("\\-");
+		splitterEno=split[split.length - 1];
 		//System.out.println(splitter);
-	}
+	}	
 	public void Splittitle(String name)
 	{
 		String[] split=name.split("\\-");
@@ -325,6 +266,23 @@ public class CanalMT {
 		//System.out.println(splitter);
 	}
 	
+	public void Spliturl(String name)
+	{
+		String[] split=name.split("\\/");
+		splitter=split[split.length - 1];
+		//System.out.println(splitter);
+	}
 	
+	
+	public void SpliturlEps(String name)
+	{
+		String[] split=name.split("\\/");
+		splitterEps=split[split.length - 2];
+		//System.out.println(splitter);
+	}
+	
+
+	
+
 
 }

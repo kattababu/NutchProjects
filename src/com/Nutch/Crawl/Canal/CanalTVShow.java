@@ -47,6 +47,7 @@ public class CanalTVShow {
 	
 	static FileOutputStream fos =null;
 	static PrintStream ps=null;
+	static String title=null;
 	
 	
 
@@ -291,7 +292,7 @@ public class CanalTVShow {
 								
 								
 								////////// Title//////////////
-								String title=Data;
+								title=Data;
 								System.out.print(title.trim()+"#<>#");
 								
 								////////// Original Title/////////
@@ -1015,7 +1016,7 @@ public class CanalTVShow {
 						if(rownames.equals(name))
 						{
 						
-							System.out.println(name);
+							//System.out.println(name);
 							if(family.equals("f") && qualifier.equals("cnt"))
 							{
 								content=Bytes.toString(kv.getValue());

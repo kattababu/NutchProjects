@@ -93,6 +93,9 @@ CanalMovRich cmr=new CanalMovRich();
 							
 							
 							/////////////////  TVSHows////////////////////
+							
+							
+							
 						
 							if(rownames.contains("/novelas"))
 							{
@@ -129,7 +132,7 @@ CanalMovRich cmr=new CanalMovRich();
 								
 								//ImageUrlS();
 								//cmr.ImageUrls(rownames);
-								//ctsrm.ImageUrlsTV(rownames);
+								ctsrm.ImageUrlsTV(rownames);
 								new CanalCNT().ContINTRowsTV(rownames);
 								
 								
@@ -141,6 +144,8 @@ CanalMovRich cmr=new CanalMovRich();
 								
 								
 							}
+							
+							
 							
 							/*
 							
@@ -350,8 +355,8 @@ CanalMovRich cmr=new CanalMovRich();
 								//mt.QualifierMatch(href);//------------------->
 								//cmr.QualifierMatch(href);
 								
-								//ctvs.QualifierMatchTv(href);
-							System.out.println(href);
+								ctvs.QualifierMatchTv(href);
+							//System.out.println(href);
 							
 							
 														//

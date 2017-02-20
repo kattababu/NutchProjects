@@ -1,5 +1,9 @@
  package com.Nutch.Crawl.Canal;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.KeyValue;
@@ -20,10 +24,25 @@ public class Sample {
 	/**
 	 * @param args
 	 */
+	
+	static FileOutputStream fos=null;
+	static PrintStream ps=null;
+	static File file=null;
+	
+	static 
+	{
+		
+		file=new File("/katta/CanalIN/SampleCont.txt");
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try
 		{
+			fos = new FileOutputStream(file,true);
+			ps = new PrintStream(fos);
+			  System.setOut(ps);
+			
+			
 		Configuration config=HBaseConfiguration.create();
 		HTable ht=new HTable(config,"canal_webpage");
 		Scan sc=new Scan();
@@ -40,7 +59,7 @@ public class Sample {
 				family=Bytes.toString(kv.getFamily());
 				qualifier=Bytes.toString(kv.getQualifier());
 				
-				if(rownames.equals("ni.com.canal10.www:http/programa/accion-10-en-la-manana"))
+				if(rownames.equals("ni.com.canal10.www:http/programa/la-rosa-de-guadalupe"))
 				{
 					if(family.equals("f") && qualifier.equals("cnt"))
 					{

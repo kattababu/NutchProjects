@@ -30,6 +30,7 @@ public class FileStore {
 	static File fileRM=null;
 	static File filePR=null;
 	static File fileTvshow=null;
+	static File fileTvshowEps=null;
 	/*
 	final static String movietable="movie_";
 	final static String crewtable="crew_";
@@ -87,7 +88,26 @@ public class FileStore {
         }
     }
 
+	//////////////////////////////////////////////////  EPSIODES////////////////////////////
 	
+	public static void EpsiodeTable(String table) {
+        //get current project path
+       // String filePath = ;
+        //create a new file with Time Stamp
+        fileTvshowEps = new File(filePath + "/" + filename+table+"_"+GetCurrentTimeStamp().replace(":","").replace(".","")+".queries");
+
+        try {
+            if (!fileTvshowEps.exists()) {
+                fileTvshowEps.createNewFile();
+                System.out.println("File is created; file name is " + fileTvshowEps.getName());
+            } else {
+                System.out.println("File already exist");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 	
 	/////////////////////////////////////////////////////////////////////// ProgramRelease///////////////
 	

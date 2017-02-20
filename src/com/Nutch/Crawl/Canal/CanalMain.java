@@ -22,9 +22,14 @@ public class CanalMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		CanalCNT cnt=new CanalCNT();
-		//CanalCNTSer cntser=new CanalCNTSer();
+		CanalCNTSer cntser=new CanalCNTSer();
+		CanalCNTPer cntper=new CanalCNTPer();
+		CanalCNTEpsiode ccntep=new CanalCNTEpsiode();
+		//ccntp.ContRowsProg();
 		
-		//cntser.ContRowsSer();
+		cntper.ContRowsPer();
+		ccntep.ContRowsProgEps();
+		cntser.ContRowsSer();
 		cnt.ContRows();
 		
 		
