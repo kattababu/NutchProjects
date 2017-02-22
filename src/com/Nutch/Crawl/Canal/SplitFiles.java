@@ -39,8 +39,8 @@ public class SplitFiles {
 			 
 			 File dir = new File("/katta/CanalIN/");
 				String[] extensions = new String[] { "queries" };
-				System.out.println("Getting all .txt and .jsp files in " + dir.getCanonicalPath()
-						+ " including those in subdirectories");
+				//System.out.println("Getting all .txt and .jsp files in " + dir.getCanonicalPath()
+					//	+ " including those in subdirectories");
 				List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, true);
 				for (File file : files) {
 					System.out.println("file: " + file.getCanonicalPath());
@@ -132,7 +132,7 @@ public class SplitFiles {
 			// Reading file and getting no. of files to be generated  
 			  String inputfile = name;//  Source File Name.  
 			  System.out.println(inputfile);
-			  double nol = 50.0; //  No. of lines to be split and saved in each output file.  
+			  double nol = 1000.0; //  No. of lines to be split and saved in each output file.  
 			  File Infile = new File(inputfile);  
 			  Scanner scanner = new Scanner(Infile);  
 			  int count = 0;  
@@ -141,7 +141,7 @@ public class SplitFiles {
 			   scanner.nextLine();  
 			   count++;  
 			  }  
-			  System.out.println("Lines in the file: " + count);     // Displays no. of lines in the input file.  
+			 // System.out.println("Lines in the file: " + count);     // Displays no. of lines in the input file.  
 
 			  double temp = (count/nol);  
 			  int temp1=(int)temp;  
@@ -154,7 +154,7 @@ public class SplitFiles {
 			  {  
 			   nof=temp1+1;  
 			  }  
-			  System.out.println("No. of files to be generated :"+nof); 
+			 // System.out.println("No. of files to be generated :"+nof); 
 				// Displays no. of files to be generated.  
 
 			  //-----------------------------------------------------------------------

@@ -32,7 +32,7 @@ public class FileStore {
 	static File filePR=null;
 	static File fileTvshow=null;
 	static File fileTvshowEps=null;
-	static int count=0;
+	//static int count=0;
 	/*
 	final static String movietable="movie_";
 	final static String crewtable="crew_";
@@ -55,7 +55,7 @@ public class FileStore {
         //get current project path
       
         //create a new file with Time Stamp
-        fileM = new File(filePath + "/" + filename+table+"_"+count+++"_"+GetCurrentTimeStamp().replace(":","").replace(".","")+".queries");
+        fileM = new File(filePath + "/" + filename+table+"_"+GetCurrentTimeStamp().replace(":","").replace(".","")+".queries");
         
        
         try {
