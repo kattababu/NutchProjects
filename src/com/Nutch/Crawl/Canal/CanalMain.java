@@ -25,12 +25,18 @@ public class CanalMain {
 		CanalCNTSer cntser=new CanalCNTSer();
 		CanalCNTPer cntper=new CanalCNTPer();
 		CanalCNTEpsiode ccntep=new CanalCNTEpsiode();
+		SplitFiles sf=new SplitFiles();
+		
+		//CanalCNTSERIND ccntsi=new CanalCNTSERIND();
+		//ccntsi.ContRowsSerIND();
 		//ccntp.ContRowsProg();
 		
 		cntper.ContRowsPer();
 		ccntep.ContRowsProgEps();
 		cntser.ContRowsSer();
 		cnt.ContRows();
+		
+		sf.FileSplitS();
 		
 		
 		

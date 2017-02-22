@@ -7,6 +7,7 @@ package com.Nutch.Crawl.Canal;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+//import java.util.Scanner;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -42,12 +43,14 @@ public class CanalMT {
 	Scan sc=null;
 	ResultScanner resc;
 	String rownames=null,family=null,qualifier=null,content=null,splitter=null;
+	static int count1 = 0;  
 	
 	static FileOutputStream fos =null;
 	static PrintStream ps=null;
 
 	
-	static 	{
+	static 
+	 	{
 				
 				FileStore.MovieTable("movie");
 		 }
@@ -155,8 +158,8 @@ public class CanalMT {
 			fos = new FileOutputStream(FileStore.fileM,true);
 			ps = new PrintStream(fos);
 			   System.setOut(ps);
-			
-			
+			 	  
+				  
 			
 			Configuration config=HBaseConfiguration.create();
 			ht=new HTable(config,"canal_webpage");
@@ -264,11 +267,14 @@ public class CanalMT {
 								
 						//////////Last _Seen/////////
 								System.out.print("#<>#");
+								System.out.print("\n");
+								
 								
 								
 								
 								
 							}
+						}
 							
 							
 						}
@@ -279,8 +285,11 @@ public class CanalMT {
 							
 						}
 					
+				  
+				  
 				
-		}
+				
+		
 		
 		
 		catch(Exception e)
@@ -291,7 +300,8 @@ public class CanalMT {
 		{
 			try
 			{
-				System.out.print("\n");
+				
+				
 				
 				ht.close();
 				resc.close();

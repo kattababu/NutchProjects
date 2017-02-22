@@ -3,9 +3,8 @@
  */
 package com.Nutch.Crawl.Canal;
 
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-//import java.util.List;
+//import java.io.FileOutputStream;
+//import java.io.PrintStream;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -15,22 +14,17 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
-//import org.apache.tika.language.LanguageIdentifier;
-//import org.jsoup.Jsoup;
-//import org.jsoup.nodes.Document;
-
-//import us.codecraft.xsoup.Xsoup;
 
 /**
  * @author surendra
  *
  */
-public class CanalCNTSer {
+public class CanalCNTSERIND {
 
 	/**
 	 * 
 	 */
-	public CanalCNTSer() {
+	public CanalCNTSERIND() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -38,20 +32,13 @@ public class CanalCNTSer {
 	Scan sc=null;
 	ResultScanner resc;
 	String rownames=null,family=null,qualifier=null,content=null,splitter=null,value=null;
-	static FileOutputStream fos =null;
-	static PrintStream ps=null;
+	//static FileOutputStream fos =null;
+	//static PrintStream ps=null;
 	
-	//static String title=null;
-	//CanalRMPeriod crmp=new CanalRMPeriod();
-	
-	
-	CanalTVShow ctvs=new CanalTVShow();
+
 	
 	
-	 
-	// 
-	
-	public void ContRowsSer()
+	public void ContRowsSerIND()
 	{
 		try
 		{
@@ -85,12 +72,14 @@ public class CanalCNTSer {
 							/////////////////  TVSHows////////////////////
 							
 						
-							if(rownames.contains("/series"))
+							if(rownames.contains("/programa/"))
 							{
 								//ContTVShowSerNON(rownames);
 								
-								ctvs.ContTVShowSer(rownames);
-								ctvs.ContTVShowSerRM(rownames);
+								
+								System.out.println(rownames);
+								//ctvs.ContTVShowSer(rownames);
+								//ctvs.ContTVShowSerRM(rownames);
 								
 							}
 							
@@ -117,9 +106,9 @@ public class CanalCNTSer {
 				ht.close();
 				resc.close();
 				//ps.flush();
-				ps.close();
+				//ps.close();
 				
-				fos.close();
+				//fos.close();
 				
 				
 			}
@@ -134,11 +123,4 @@ public class CanalCNTSer {
 		
 	}
 	
-///////////////////////////////////////////
-	
-	
-
-			
-	
-
 }

@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+//import java.util.Scanner;
 
 /**
  * @author surendra
@@ -31,6 +32,7 @@ public class FileStore {
 	static File filePR=null;
 	static File fileTvshow=null;
 	static File fileTvshowEps=null;
+	static int count=0;
 	/*
 	final static String movietable="movie_";
 	final static String crewtable="crew_";
@@ -51,18 +53,29 @@ public class FileStore {
 	
 	public static void MovieTable(String table) {
         //get current project path
-       // String filePath = ;
+      
         //create a new file with Time Stamp
-        fileM = new File(filePath + "/" + filename+table+"_"+GetCurrentTimeStamp().replace(":","").replace(".","")+".queries");
-
+        fileM = new File(filePath + "/" + filename+table+"_"+count+++"_"+GetCurrentTimeStamp().replace(":","").replace(".","")+".queries");
+        
+       
         try {
-            if (!fileM.exists()) {
-                fileM.createNewFile();
-                System.out.println("File is created; file name is " + fileM.getName());
-            } else {
-                System.out.println("File already exist");
-            }
-        } catch (IOException e) {
+        	  if (!fileM.exists()) {
+                  fileM.createNewFile();
+                  System.out.println("File is created; file name is " + fileM.getName());
+                  
+                  
+                   
+                  
+                 
+              } else {
+            	  
+            	    System.out.println("File already exist");
+              }
+        	  
+         
+        	
+        	 
+           } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -212,6 +225,7 @@ public class FileStore {
         String strDate = sdfDate.format(now);
         return strDate;
     }
+    
     
     
     /*
