@@ -197,8 +197,16 @@ public class SplitFiles {
 			 e.printStackTrace();
 		  //System.err.println("Error: " + e.getMessage());  
 		 }  
+		 /*
 		 
-
+		 finally
+		 {
+			 try
+			 {
+				 //fname.
+			 }
+		 }
+*/
 	}
 	
 
