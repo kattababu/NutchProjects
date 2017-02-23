@@ -10,10 +10,10 @@ public class JavaRunCommand {
         String cmd[]={"/bin/bash","-c",cp};
         
         
-       String filepath="/katta/CanalIN/FileToDb.sh";
+      // String filepath="/katta/CanalIN/FileToDb.sh";
 
         try {
-        	 Process p = Runtime.getRuntime().exec(filepath);
+        	 Process p = Runtime.getRuntime().exec(cmd);
              p.waitFor();
              InputStream in = p.getInputStream();
              ByteArrayOutputStream baos = new ByteArrayOutputStream();
