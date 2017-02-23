@@ -22,8 +22,9 @@ public static void main(String args[]) throws JSchException {
     channel.connect();
     ChannelSftp cFTP = (ChannelSftp) channel;
     JSch.setConfig("StrictHostKeyChecking", "no");
-    String sourceFile = "/katta/CanalIN/CanalIN_Terminal_movie_20170222T13225600073.queries", targetFile = "/Users/hrb/sathwick_nutch_files";
+    String sourceFile = "/katta/CanalIN/1_CanalIN_Terminal_movie_20170223T11313500637.queries", targetFile = "/Users/hrb/sathwick_nutch_files";
     try {
+    	
 
         cFTP.put(sourceFile , targetFile );
     } catch (SftpException e) {

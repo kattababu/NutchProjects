@@ -10,10 +10,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
+
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
 
 /**
  * @author surendra
@@ -31,6 +39,7 @@ public class SplitFiles {
 	/**
 	 * @param args
 	 */
+	static String DestSouc=null;
 	public static void FileSplitS() {
 		// TODO Auto-generated method stub
 		
@@ -158,6 +167,24 @@ public class SplitFiles {
 				// Displays no. of files to be generated.  
 
 			  //-----------------------------------------------------------------------
+			  
+//			   Remote Connection Files://///////////////////
+			  
+			  JSch jsch = new JSch();
+			    Session session = jsch.getSession("hrb", "office.headrun.com");//.getSession("hrb", "10.152.232.1", 22); //port is usually 22
+			    session.setPassword("satishdhawan16!");
+			    java.util.Properties config = new java.util.Properties(); 
+			    config.put("StrictHostKeyChecking", "no");
+			    session.setConfig(config);
+			    //session.
+			  // Session.put("StrictHostKeyChecking", "no");
+			    session.connect();
+			    Channel channel = session.openChannel("sftp");
+			    channel.connect();
+			    ChannelSftp cFTP = (ChannelSftp) channel;
+			    JSch.setConfig("StrictHostKeyChecking", "no");
+			    cFTP.cd("/Users/hrb/sathwick_nutch_files");
+			 
 
 	
 		 
@@ -166,11 +193,17 @@ public class SplitFiles {
 		  FileInputStream fstream = new FileInputStream(inputfile); DataInputStream in = new DataInputStream(fstream);  
 
 		  BufferedReader br = new BufferedReader(new InputStreamReader(in)); String strLine;  
+		  
+		 //String DestSource= 
 
 		  for (int j=1;j<=nof;j++)  
 		  {  
-		   FileWriter fstream1 = new FileWriter("/katta/CanalIN/"+j+"_"+fname);     // Destination File Location  
-		   BufferedWriter out = new BufferedWriter(fstream1);   
+			  DestSouc=j+"_"+fname;
+			  
+			  OutputStream strm = cFTP.put(DestSouc);
+		  //FileWriter fstream1 = new FileWriter(DestSouc); 
+		  //cFTP.// Destination File Location  
+		   BufferedWriter out = new BufferedWriter(new PrintWriter(strm));   
 		   for (int i=1;i<=nol;i++)  
 		   {  
 		    strLine = br.readLine();   
@@ -187,6 +220,8 @@ public class SplitFiles {
 		  }  
 
 		  in.close();  
+		  cFTP.disconnect();
+		    session.disconnect();
 		  
 		 
 		 }
@@ -197,18 +232,50 @@ public class SplitFiles {
 			 e.printStackTrace();
 		  //System.err.println("Error: " + e.getMessage());  
 		 }  
-		 /*
 		 
+		 /*
 		 finally
 		 {
 			 try
 			 {
-				 //fname.
-			 }
+			 
+			 JSch jsch = new JSch();
+			    Session session = jsch.getSession("hrb", "office.headrun.com");//.getSession("hrb", "10.152.232.1", 22); //port is usually 22
+			    session.setPassword("satishdhawan16!");
+			    java.util.Properties config = new java.util.Properties(); 
+			    config.put("StrictHostKeyChecking", "no");
+			    session.setConfig(config);
+			    //session.
+			  // Session.put("StrictHostKeyChecking", "no");
+			    session.connect();
+			    Channel channel = session.openChannel("sftp");
+			    channel.connect();
+			    ChannelSftp cFTP = (ChannelSftp) channel;
+			    JSch.setConfig("StrictHostKeyChecking", "no");
+			    String sourceFile = DestSouc, targetFile = "/Users/hrb/sathwick_nutch_files";
+			    
+
+			        cFTP.put(sourceFile , targetFile );
+			        
+			        cFTP.disconnect();
+				    session.disconnect();
+			    } catch (SftpException e) {
+			        // TODO Auto-generated catch block
+			        e.printStackTrace();
+			    }
+			    catch (Exception e) {
+			        // TODO Auto-generated catch block
+			        e.printStackTrace();
+			    }
+
+			    
+			}
+			*/
+
 		 }
-*/
+
 	}
 	
 
 
-}
+
