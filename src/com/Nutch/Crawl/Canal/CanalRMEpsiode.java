@@ -5,6 +5,8 @@ package com.Nutch.Crawl.Canal;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -37,7 +39,7 @@ public class CanalRMEpsiode {
 	HTable ht=null;
 	Scan sc=null;
 	ResultScanner resc;
-	String rownames=null,family=null,qualifier=null,content=null,splitter=null,splitter1=null;
+	String rownames=null,family=null,qualifier=null,content=null,splitter=null,splitter1=null,splitterIMD=null,ImgDimes=null;
 	
 	String imag=null;
 	String uname=null;
@@ -197,7 +199,7 @@ static String mainurl="http://www.canal10.com.ni";
 		
 		
 		/////////////Program_Type///////////
-		System.out.print("tvshow"+"#<>#");
+		System.out.print("episode"+"#<>#");
 		
 		
 /////////////Media_Type///////////
@@ -209,7 +211,17 @@ static String mainurl="http://www.canal10.com.ni";
 /////////////Size///////////
 		System.out.print("#<>#");
 /////////////Dimensions///////////
+		
+		if(imag.contains("x"))
+		{
+			ImageDes(imag);
+			System.out.print(ImgDimes+"#<>#");
+		}
+		else
+		{
 		System.out.print("#<>#");
+		}
+		//System.out.print("#<>#");
 		
 /////////////Description///////////
 		System.out.print("#<>#");
@@ -248,6 +260,47 @@ static String mainurl="http://www.canal10.com.ni";
 
 	}
 	
+	
+	/////////////////////////////////////
+	
+	public void ImageDes(String name)
+	{
+		
+			String[] split=name.split("\\/");
+			splitterIMD=split[split.length - 1];
+			//System.out.println("\n");
+			
+			String pattern="(\\d+)(x)(\\d+)";
+			
+			Pattern r = Pattern.compile(pattern);
+
+		      // Now create matcher object.
+		      Matcher m = r.matcher(splitterIMD);
+		      if (m.find( )) {
+		    	  ImgDimes=  m.group(0) ;
+		           }else {
+		         System.out.println("NO MATCH");
+		      }
+		      /*
+			String dsp[]=splitterIMD.split("x");
+			String fn=dsp[0];
+			System.out.println(num);
+			
+			
+			String nn=dsp[1];
+			String lastn=nn.substring(0, num);
+			
+			ImgDimes=fn+"x"+lastn;
+			*/
+		
+		//System.out.println(dsp);
+			
+			//System.out.println("\n");
+			
+			
+		}
+	
+
 	
 	
 	///////////////////////////

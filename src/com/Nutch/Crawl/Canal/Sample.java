@@ -59,7 +59,7 @@ public class Sample {
 				family=Bytes.toString(kv.getFamily());
 				qualifier=Bytes.toString(kv.getQualifier());
 				
-				if(rownames.equals("ni.com.canal10.www:http/programa/la-rosa-de-guadalupe"))
+				if(rownames.equals("ni.com.canal10.www:http/programa/accion-10-fin-de-semana"))
 				{
 					if(family.equals("f") && qualifier.equals("cnt"))
 					{
@@ -71,6 +71,8 @@ public class Sample {
 				}
 			}
 		}
+		
+		//accion-10-edicion-del-mediodia/accion-10-mediodia--programa-del-24-de-enero-2017-22642
 		
 		ht.close();
 		rescan.close();

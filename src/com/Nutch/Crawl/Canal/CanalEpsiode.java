@@ -5,6 +5,7 @@ package com.Nutch.Crawl.Canal;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.util.Locale;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -35,7 +36,7 @@ public class CanalEpsiode {
 	HTable ht=null;
 	Scan sc=null;
 	ResultScanner resc;
-	String rownames=null,family=null,qualifier=null,content=null,splitter=null,splitterEps=null,splitterEno=null;
+	String rownames=null,family=null,qualifier=null,content=null,splitter=null,splitterEps=null,splitterEno=null,splitterShow=null;
 	static FileOutputStream fos =null;
 	static PrintStream ps=null;
 	static 	{
@@ -100,7 +101,7 @@ public class CanalEpsiode {
 								System.out.print("#<>#");
 								
 								//////////////////////  TvShow_Sk//////////////
-								SpliturlEps(url);
+							SpliturlEps(url);
 								
 								System.out.print(splitterEps.trim()+"#<>#");
 								
@@ -109,13 +110,20 @@ public class CanalEpsiode {
 								
 								
 								////////// Title//////////////
+								/*
 								String title=Xsoup.compile("//meta[@property='og:title']/@content").evaluate(document).get();
 								Splittitle(title);
 								System.out.print(splitter.trim()+"#<>#");
+								*/
+								String title=Xsoup.compile("//div[@class='texto']//text()").evaluate(document).get();
+								
+								System.out.print(title.trim()+"#<>#");
+								
 								
 								
 								////////// Show Title/////////
-								System.out.print("#<>#");
+								SplitShowtitle(title);
+								System.out.print(splitterShow+"#<>#");
 								
 								
 								////////// Original Title/////////
@@ -126,15 +134,17 @@ public class CanalEpsiode {
 								System.out.print("#<>#");
 						
 								/////// Description///////////////
+								/*
 								
 								String descript=Xsoup.compile("//div[@class='texto']//text()").evaluate(document).get();
 													
 								System.out.print(descript.trim()+"#<>#");
-								
+								*/
+								System.out.print("#<>#");
 								
 						////////// Episode Number/////////
-								SplitEpsNo(url);
-								System.out.print(splitterEno+"#<>#");
+								
+								System.out.print("#<>#");
 								
 						////////// Season_Number/////////
 								System.out.print("#<>#");
@@ -168,10 +178,9 @@ public class CanalEpsiode {
 								
 								LanguageIdentifier identifier = new LanguageIdentifier(title);
 								String lang=identifier.getLanguage();
-								
-								
-								
-								System.out.print(lang.trim()+"#<>#");
+								Locale loc =new Locale(lang);
+								String namevalue=loc.getDisplayLanguage(loc);
+								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
 								
 								
 								
@@ -253,12 +262,7 @@ public class CanalEpsiode {
 	}
 
 	
-	public void SplitEpsNo(String name)
-	{
-		String[] split=name.split("\\-");
-		splitterEno=split[split.length - 1];
-		//System.out.println(splitter);
-	}	
+		
 	public void Splittitle(String name)
 	{
 		String[] split=name.split("\\-");
@@ -278,6 +282,13 @@ public class CanalEpsiode {
 	{
 		String[] split=name.split("\\/");
 		splitterEps=split[split.length - 2];
+		//System.out.println(splitter);
+	}
+	
+	public void SplitShowtitle(String name)
+	{
+		String[] split=name.split("\\:");
+		splitterShow=split[split.length - 2];
 		//System.out.println(splitter);
 	}
 	

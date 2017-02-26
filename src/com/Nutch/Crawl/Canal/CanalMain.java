@@ -36,7 +36,7 @@ public class CanalMain {
 		cntser.ContRowsSer();
 		cnt.ContRows();
 		
-		SplitFiles.FileSplitS();
+		//SplitFiles.FileSplitS();
 		
 		
 		

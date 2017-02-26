@@ -6,6 +6,9 @@ package com.Nutch.Crawl.Canal;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -40,7 +43,7 @@ public class CanalTVShow {
 	HTable ht=null;
 	Scan sc=null;
 	ResultScanner resc;
-	String rownames=null,family=null,qualifier=null,content=null,splitter=null;
+	String rownames=null,family=null,qualifier=null,content=null,splitter=null,splitterIMD=null,ImgDimes=null;
 	
 	String imag=null;
 	String uname=null;
@@ -48,6 +51,7 @@ public class CanalTVShow {
 	static FileOutputStream fos =null;
 	static PrintStream ps=null;
 	static String title=null;
+	MSDigest msd=new MSDigest();
 	
 	
 
@@ -72,7 +76,7 @@ public class CanalTVShow {
 			 System.setOut(ps);
 			
 			
-			MSDigest msd=new MSDigest();
+		
 			Configuration config=HBaseConfiguration.create();
 			ht=new HTable(config,"canal_webpage");
 			sc=new Scan();
@@ -146,12 +150,12 @@ public class CanalTVShow {
 								
 								
 						//////////Languages/////////
-								LanguageIdentifier identifier = new LanguageIdentifier(title);
-								String lang=identifier.getLanguage();
+
+								System.out.print("#<>#");
 								
 								
 								
-								System.out.print(lang.trim()+"#<>#");
+								//System.out.print(lang.trim()+"#<>#");
 								
 								
 						//////////Original Languages/////////
@@ -159,7 +163,15 @@ public class CanalTVShow {
 								
 								
 						//////////Metadata_language/////////
-								System.out.print("#<>#");
+								
+								LanguageIdentifier identifier = new LanguageIdentifier(title);
+								String lang=identifier.getLanguage();
+								Locale loc =new Locale(lang);
+								String namevalue=loc.getDisplayLanguage(loc);
+								
+								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
+								
+								
 								
 								
 								
@@ -238,7 +250,7 @@ public class CanalTVShow {
 	}
 	
 	
-	//////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////TV Show  for Series//////////////
 	
 	
 	public void ContTVShowSer(String name)
@@ -324,12 +336,11 @@ public class CanalTVShow {
 								
 								
 						//////////Languages/////////
-								LanguageIdentifier identifier = new LanguageIdentifier(title);
-								String lang=identifier.getLanguage();
+								System.out.print("#<>#");
 								
 								
 								
-								System.out.print(lang.trim()+"#<>#");
+								//System.out.print(lang.trim()+"#<>#");
 								
 								
 						//////////Original Languages/////////
@@ -337,7 +348,15 @@ public class CanalTVShow {
 								
 								
 						//////////Metadata_language/////////
-								System.out.print("#<>#");
+								LanguageIdentifier identifier = new LanguageIdentifier(title);
+								String lang=identifier.getLanguage();
+								Locale loc =new Locale(lang);
+								String namevalue=loc.getDisplayLanguage(loc);
+								
+								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
+								
+								
+								
 								
 								
 								
@@ -516,7 +535,19 @@ public class CanalTVShow {
 								System.out.print("#<>#");
 								
 						/////////////Dimensions///////////
+								
+								if(imgs.contains("x"))
+								{
+									
+									ImageDes(imgs);
+									System.out.print(ImgDimes+"#<>#");
+								}
+								else
+								{
 								System.out.print("#<>#");
+								}
+							
+								//System.out.print("#<>#");
 								
 						/////////////Description///////////
 								System.out.print("#<>#");
@@ -604,7 +635,54 @@ public class CanalTVShow {
 		
 	}
 	
-	////////////////////////////////////////////////////////
+	//////////////////////////////////
+	
+	public void ImageDes(String name)
+	{
+		
+			String[] split=name.split("\\/");
+			splitterIMD=split[split.length - 1];
+			//System.out.println("\n");
+			
+			String pattern="(\\d+)(x)(\\d+)";
+			
+			Pattern r = Pattern.compile(pattern);
+
+		      // Now create matcher object.
+		      Matcher m = r.matcher(splitterIMD);
+		      if (m.find( )) {
+		    	  ImgDimes=  m.group(0) ;
+		           }else {
+		         System.out.println("NO MATCH");
+		      }
+		      /*
+			String dsp[]=splitterIMD.split("x");
+			String fn=dsp[0];
+			System.out.println(num);
+			
+			
+			String nn=dsp[1];
+			String lastn=nn.substring(0, num);
+			
+			ImgDimes=fn+"x"+lastn;
+			*/
+		
+		//System.out.println(dsp);
+			
+			//System.out.println("\n");
+			
+			
+		}
+	
+
+
+	
+	
+	
+	
+	
+	
+	////////////////////////////////////////////////////////Rich Media to Series////////////////
 	
 	
 	
@@ -702,7 +780,18 @@ public class CanalTVShow {
 								System.out.print("#<>#");
 								
 						/////////////Dimensions///////////
+								if(imgs.contains("x"))
+								{
+									
+									ImageDes(imgs);
+									System.out.print(ImgDimes+"#<>#");
+								}
+								else
+								{
 								System.out.print("#<>#");
+								}
+							
+								
 								
 						/////////////Description///////////
 								System.out.print("#<>#");
@@ -850,7 +939,8 @@ public class CanalTVShow {
 							
 							//content=Bytes.toString(kv.getValue());
 							//System.out.println(rownames);
-							CanalTvshowData(rownames);
+							 new CanalTVShow().CanalTvshowData(rownames);
+							 new CanalTVShow().CanalTvshowDataLargeImg(rownames);
 							//CanalTvShowCNTEps(rownames);
 							
 							
@@ -981,7 +1071,7 @@ public class CanalTVShow {
 */
 
 	
-	////////////////////////////////////////// TVShows DataView/////////////////////////
+	////////////////////////////////////////// TVShows DataView Internal Data/////////////////////////
 	
 	
 	
@@ -1074,10 +1164,11 @@ public class CanalTVShow {
 								
 								LanguageIdentifier identifier = new LanguageIdentifier(title);
 								String lang=identifier.getLanguage();
+								Locale loc =new Locale(lang);
+								String namevalue=loc.getDisplayLanguage(loc);
 								
+								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
 								
-								
-								System.out.print(lang.trim()+"#<>#");
 								
 								
 								
@@ -1153,6 +1244,168 @@ public class CanalTVShow {
 		
 		
 	}
+	
+	
+	//////////////////////////////////// LargeImage TV SHOW CANAL///////////////////////
+	
+	
+	public void CanalTvshowDataLargeImg(String name)
+	{
+		
+		//CanalCNT cnt=new CanalCNT();
+		
+		try
+		{
+			
+			fos = new FileOutputStream(FileStore.fileRM,true);
+			ps = new PrintStream(fos);
+			   System.setOut(ps);
+			 	  
+				  
+			
+			Configuration config=HBaseConfiguration.create();
+			ht=new HTable(config,"canal_webpage");
+			sc=new Scan();
+			resc=ht.getScanner(sc);
+			for(Result res = resc.next(); (res != null); res=resc.next())
+			{
+				for(KeyValue kv:res.list())
+				{
+					
+					rownames=Bytes.toString(kv.getRow());
+					family=Bytes.toString(kv.getFamily());
+					qualifier=Bytes.toString(kv.getQualifier());
+					
+										
+						if(rownames.equals(name))
+						{
+						
+								content=Bytes.toString(kv.getValue());
+								Document document = Jsoup.parse(content);
+								//System.out.println(name);
+								
+								///////////// Large Image INTERNAL///////////////////////
+								String imgLarge=Xsoup.compile("//div[@id='vodzone']//img/@src").evaluate(document).get();
+								if(imgLarge!=null)
+								{
+								
+								//System.out.println(imgLarge);
+								msd.MD5(imgLarge);
+								System.out.print(msd.md5s+"#<>#");
+								
+								
+								/////////////Program _Sk ///////////////////
+								
+								String url=Xsoup.compile("//meta[@property='og:url']/@content").evaluate(document).get();
+								Spliturl(url);
+								System.out.print(splitter.trim()+"#<>#");
+								
+								/////////////Program_Type///////////
+								System.out.print("tvshow"+"#<>#");
+								
+								
+						/////////////Media_Type///////////
+								System.out.print("image"+"#<>#");
+								
+						/////////////Image_Type///////////
+								System.out.print("large"+"#<>#");
+								
+						/////////////Size///////////
+								System.out.print("#<>#");
+						/////////////Dimensions///////////
+								
+								
+								if(imgLarge.contains("x"))
+								{
+									ImageDes(imgLarge);
+									System.out.print(ImgDimes+"#<>#");
+								}
+								else
+								{
+								System.out.print("#<>#");
+								}
+								
+								System.out.print("#<>#");
+								
+						/////////////Description///////////
+								System.out.print("#<>#");
+								
+								
+						/////////////Image_URL///////////
+								System.out.print(imgLarge.trim()+"#<>#");
+								
+								
+						/////////////Reference_url///////////
+								System.out.print(url.trim()+"#<>#");
+								
+								
+						///////////Aux_Info////////
+								System.out.print("#<>#");
+								
+						//////////Created_At/////////
+								System.out.print("#<>#");
+								
+						//////////Modified_At/////////
+								System.out.print("#<>#");
+								
+						//////////Last _Seen/////////
+								System.out.print("#<>#");
+								System.out.print("\n");
+								
+								
+								//System.lineSeparator();
+								
+
+								}
+								
+								
+							}
+						}
+							
+							
+						}
+								
+								
+					
+							
+							
+						}
+					
+				  
+				  
+				
+				
+		
+		
+		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				
+				
+				
+				ht.close();
+				resc.close();
+				fos.close();
+				ps.close();
+				
+			}
+			
+			catch(Exception e)
+			{
+				e.getMessage();
+			}
+		}
+		
+		
+		
+	}
+
 	
 	
 	
