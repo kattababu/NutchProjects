@@ -289,6 +289,7 @@ public void QualifierMatchEpsiode(String name)
 						//CanalTVDataPer(rownames);
 						//System.out.println(rownames);
 						ce.CanalEPSDataPer(rownames);
+						ce.CanalEPSImagePER(rownames);
 						
 						
 													

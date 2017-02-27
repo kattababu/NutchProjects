@@ -48,7 +48,7 @@ public class CanalCNTPer {
 		HTable ht=null;
 		Scan sc=null;
 		ResultScanner resc;
-		String rownames=null,family=null,qualifier=null,content=null,splitterEps=null,splitterEno=null,splitterIMD=null,ImgDimes=null;
+		String rownames=null,family=null,qualifier=null,content=null,splitterEps=null,splitterEno=null,splitterIMD=null,ImgDimes=null,splitterImage=null;
 		static FileOutputStream fos =null;
 		static PrintStream ps=null;
 		static String splittertitle=null;
@@ -549,6 +549,8 @@ public class CanalCNTPer {
 			//System.out.println(splitter);
 		}
 
+		
+		
 	/////////////////////////////////////////////////// LARGE IMAGES TV SHOWS//////////////////////
 		public void CanalTvshowPerLargeImg(String name)
 		{
@@ -586,14 +588,16 @@ public class CanalCNTPer {
 									//System.out.println(name);
 									
 									///////////// Large Image INTERNAL///////////////////////
-									String imgLarge=Xsoup.compile("//div[@id='vodzone']//img/@src").evaluate(document).get();
+									String imgLarge=Xsoup.compile("//*[@id='lista']/div[@class='item active']/@style").evaluate(document).get();
 									
-									System.out.println("imgLarge"+imgLarge);
+									
+									
 									if(imgLarge!=null)
 									{
+										SplitImages(imgLarge);
 									
 									//System.out.println(imgLarge);
-									msd.MD5(imgLarge);
+									msd.MD5(splitterImage);
 									System.out.print(msd.md5s+"#<>#");
 									
 									
@@ -620,7 +624,7 @@ public class CanalCNTPer {
 									
 									if(imgLarge.contains("x"))
 									{
-										ImageDes(imgLarge);
+										ImageDes(splitterImage);
 										System.out.print(ImgDimes+"#<>#");
 									}
 									else
@@ -635,7 +639,7 @@ public class CanalCNTPer {
 									
 									
 							/////////////Image_URL///////////
-									System.out.print(imgLarge.trim()+"#<>#");
+									System.out.print(splitterImage.trim()+"#<>#");
 									
 									
 							/////////////Reference_url///////////
@@ -658,8 +662,10 @@ public class CanalCNTPer {
 									
 									//System.lineSeparator();
 									
+									
 
 									}
+									
 									
 									
 								}
@@ -709,7 +715,7 @@ public class CanalCNTPer {
 			
 		}
 
-		
+
 
 		public void ImageDes(String name)
 		{
@@ -750,6 +756,15 @@ public class CanalCNTPer {
 		
 
 
+		public void SplitImages(String name)
+		{
+			String[] split=name.split("\\(");
+			String splitterImgData=split[split.length - 1];
+			//System.out.println(splitter);
+			splitterImage=splitterImgData.substring(0,splitterImgData.length()-2);
+			//System.out.println(splitterImage);
+		}
+	
 
 		
 		

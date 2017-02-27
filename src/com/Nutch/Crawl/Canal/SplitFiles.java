@@ -171,8 +171,8 @@ public class SplitFiles {
 //			   Remote Connection Files://///////////////////
 			  
 			  JSch jsch = new JSch();
-			    Session session = jsch.getSession("hrb", "office.headrun.com");//.getSession("hrb", "10.152.232.1", 22); //port is usually 22
-			    session.setPassword("satishdhawan16!");
+			    Session session = jsch.getSession("interns", "176.9.181.61",22);//.getSession("hrb", "10.152.232.1", 22); //port is usually 22
+			    session.setPassword("hdrn59!");
 			    java.util.Properties config = new java.util.Properties(); 
 			    config.put("StrictHostKeyChecking", "no");
 			    session.setConfig(config);
@@ -183,7 +183,7 @@ public class SplitFiles {
 			    channel.connect();
 			    ChannelSftp cFTP = (ChannelSftp) channel;
 			    JSch.setConfig("StrictHostKeyChecking", "no");
-			    cFTP.cd("/Users/hrb/sathwick_nutch_files");
+			    cFTP.cd("/home/interns/sath_GenFramework/juicer/spiders/OUTPUT/processing/");
 			 
 
 	

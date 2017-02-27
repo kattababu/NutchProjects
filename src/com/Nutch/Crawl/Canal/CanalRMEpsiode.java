@@ -88,6 +88,7 @@ static String mainurl="http://www.canal10.com.ni";
 					{
 						
 						Spliturl(name);
+						SplitImg_SK(name);
 						
 						
 						
@@ -194,7 +195,7 @@ static String mainurl="http://www.canal10.com.ni";
 		
 		
 		/// Program _SK//////////// Value
-		String p_sk=splitter;
+		String p_sk=splitter1;
 		System.out.print(p_sk.trim()+"#<>#");
 		
 		
@@ -456,14 +457,14 @@ static String mainurl="http://www.canal10.com.ni";
 		//System.out.println(splitter);
 	}
 	
-	/*
-	public void Spliturl1(String name)
+	
+	public void SplitImg_SK(String name)
 	{
 		String[] split=name.split("\\/");
 		splitter1=split[split.length - 1];
 		//System.out.println(splitter);
 	}
 
-*/
+
 
 }
