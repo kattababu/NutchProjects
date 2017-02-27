@@ -24,7 +24,7 @@ public class FileStore {
 	
 	
 	final  static String filePath ="/katta/CanalIN";
-	final  static String filename="CanalIN_Terminal_";
+	final  static String filename="Canal10_Terminal_";
 	static File fileM=null;
 	static File fileC=null;
 	static File filePC=null;

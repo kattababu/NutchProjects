@@ -12,6 +12,8 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,20 +41,29 @@ public class SplitFiles {
 	/**
 	 * @param args
 	 */
-	static String DestSouc=null;
+//	static String DestSouc=null;
+	
+	static String tabn=null;
+	
+	final static String hostname="176.9.181.61";
+	final static String username="interns";
+	final static String password="hdrn59!";
+	final static String destination="/home/interns/sath_GenFramework/juicer/spiders/OUTPUT/processing/";
+	
+	
 	public static void FileSplitS() {
 		// TODO Auto-generated method stub
 		
 		
 		 try{  
 			 
-			 File dir = new File("/katta/CanalIN/");
+			 File dir = new File(FileStore.filePath+"/");
 				String[] extensions = new String[] { "queries" };
 				//System.out.println("Getting all .txt and .jsp files in " + dir.getCanonicalPath()
 					//	+ " including those in subdirectories");
 				List<File> files = (List<File>) FileUtils.listFiles(dir, extensions, true);
 				for (File file : files) {
-					System.out.println("file: " + file.getCanonicalPath());
+					//System.out.println("file: " + file.getCanonicalPath());
 					
 					String fnamespath=file.getCanonicalPath();
 					String filename=file.getName();
@@ -140,7 +151,7 @@ public class SplitFiles {
 		{
 			// Reading file and getting no. of files to be generated  
 			  String inputfile = name;//  Source File Name.  
-			  System.out.println(inputfile);
+			  //System.out.println(inputfile);
 			  double nol = 1000.0; //  No. of lines to be split and saved in each output file.  
 			  File Infile = new File(inputfile);  
 			  Scanner scanner = new Scanner(Infile);  
@@ -171,8 +182,11 @@ public class SplitFiles {
 //			   Remote Connection Files://///////////////////
 			  
 			  JSch jsch = new JSch();
-			    Session session = jsch.getSession("interns", "176.9.181.61",22);//.getSession("hrb", "10.152.232.1", 22); //port is usually 22
-			    session.setPassword("hdrn59!");
+			  //  Session session = jsch.getSession("interns", "176.9.181.61",22);//.getSession("hrb", "10.152.232.1", 22); //port is usually 22
+			   // session.setPassword("hdrn59!");
+			  Session session = jsch.getSession(username,hostname,22);//.getSession("hrb", "10.152.232.1", 22); //port is usually 22
+			   session.setPassword(password);
+			   
 			    java.util.Properties config = new java.util.Properties(); 
 			    config.put("StrictHostKeyChecking", "no");
 			    session.setConfig(config);
@@ -183,7 +197,8 @@ public class SplitFiles {
 			    channel.connect();
 			    ChannelSftp cFTP = (ChannelSftp) channel;
 			    JSch.setConfig("StrictHostKeyChecking", "no");
-			    cFTP.cd("/home/interns/sath_GenFramework/juicer/spiders/OUTPUT/processing/");
+			   // cFTP.cd("/home/interns/sath_GenFramework/juicer/spiders/OUTPUT/processing/");
+			    cFTP.cd(destination);
 			 
 
 	
@@ -198,9 +213,14 @@ public class SplitFiles {
 
 		  for (int j=1;j<=nof;j++)  
 		  {  
-			  DestSouc=j+"_"+fname;
+			  SplitFile(fname);
 			  
-			  OutputStream strm = cFTP.put(DestSouc);
+			 // DestSouc="Canal10_Terminal_";
+			  
+			  
+			  
+			  
+			  OutputStream strm = cFTP.put(FileStore.filename+tabn+"_"+GetCurrentTimeStamp().replace(":","").replace(".","")+".queries");
 		  //FileWriter fstream1 = new FileWriter(DestSouc); 
 		  //cFTP.// Destination File Location  
 		   BufferedWriter out = new BufferedWriter(new PrintWriter(strm));   
@@ -273,6 +293,25 @@ public class SplitFiles {
 			*/
 
 		 }
+	
+	
+	
+	
+	public static void SplitFile(String name)
+	{
+		String[] f=name.split("\\_");
+		tabn=f[f.length-2];
+		//System.out.println(tabn);
+	}
+	
+	
+	public static String GetCurrentTimeStamp() {
+        SimpleDateFormat sdfDate = new SimpleDateFormat(
+                "yyyyMMdd'T'HH:mm:ss.SSSSS");// dd/MM/yyyy
+        Date now = new Date();
+        String strDate = sdfDate.format(now);
+        return strDate;
+    }
 
 	}
 	
