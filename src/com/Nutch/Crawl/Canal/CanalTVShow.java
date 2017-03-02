@@ -18,7 +18,7 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
-import org.apache.tika.language.LanguageIdentifier;
+//import org.apache.tika.language.LanguageIdentifier;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -51,6 +51,7 @@ public class CanalTVShow {
 	static FileOutputStream fos =null;
 	static PrintStream ps=null;
 	static String title=null;
+	static String tvshowmdg=null;
 	MSDigest msd=new MSDigest();
 	
 	
@@ -164,6 +165,7 @@ public class CanalTVShow {
 								
 						//////////Metadata_language/////////
 								
+								/*
 								LanguageIdentifier identifier = new LanguageIdentifier(title);
 								String lang=identifier.getLanguage();
 								Locale loc =new Locale(lang);
@@ -171,7 +173,8 @@ public class CanalTVShow {
 								
 								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
 								
-								
+								*/
+								System.out.print("spanish"+"#<>#");
 								
 								
 								
@@ -298,8 +301,10 @@ public class CanalTVShow {
 								//System.out.println(Data);
 								
 								////////// SK Value//////////////
-								msd.MD5(Data);
-								System.out.print(msd.md5s.trim()+"#<>#");
+								msd.MD5(Data.trim());
+								
+								tvshowmdg=msd.md5s.trim();
+								System.out.print(tvshowmdg+"#<>#");
 								
 								
 								
@@ -348,6 +353,7 @@ public class CanalTVShow {
 								
 								
 						//////////Metadata_language/////////
+								/*
 								LanguageIdentifier identifier = new LanguageIdentifier(title);
 								String lang=identifier.getLanguage();
 								Locale loc =new Locale(lang);
@@ -355,7 +361,8 @@ public class CanalTVShow {
 								
 								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
 								
-								
+								*/
+								System.out.print("spanish"+"#<>#");
 								
 								
 								
@@ -501,7 +508,7 @@ public class CanalTVShow {
 							  for(Element el3:els3)
 							  {
 								  Data=el3.ownText();
-								 // System.out.println(Data);
+								 //System.out.println(Data);
 							  }
 							  
 							  
@@ -518,7 +525,9 @@ public class CanalTVShow {
 								
 								/// Program _SK//////////// Value
 								msd.MD5(Data);
-								System.out.print(msd.md5s.trim()+"#<>#");
+								
+								tvshowmdg=msd.md5s.trim();
+								System.out.print(tvshowmdg+"#<>#");
 								
 								
 								/////////////Program_Type///////////
@@ -745,8 +754,8 @@ public class CanalTVShow {
 							  Elements els3=el1.select("div.titulo");
 							  for(Element el3:els3)
 							  {
-								  Data=el3.ownText();
-								 // System.out.println(Data);
+								  Data=el3.ownText().trim();
+								 
 							  }
 							  
 							  
@@ -762,8 +771,13 @@ public class CanalTVShow {
 								
 								
 								/// Program _SK//////////// Value
-								msd.MD5(Data);
-								System.out.print(msd.md5s.trim()+"#<>#");
+								//System.out.println(Data);
+								msd.MD5(Data.trim());
+								tvshowmdg=msd.md5s.trim();
+								System.out.print(tvshowmdg+"#<>#");
+								
+								
+								//System.out.print(msd.md5s.trim()+"#<>#");
 								
 								
 								/////////////Program_Type///////////
@@ -862,9 +876,9 @@ public class CanalTVShow {
 				
 				ht.close();
 				resc.close();
-				//ps.flush();
-				fos.close();
 				ps.close();
+				fos.close();
+				
 				
 				
 			}
@@ -1162,12 +1176,15 @@ public class CanalTVShow {
 								
 						//////////Metadata_language/////////
 								
+								/*
 								LanguageIdentifier identifier = new LanguageIdentifier(title);
 								String lang=identifier.getLanguage();
 								Locale loc =new Locale(lang);
 								String namevalue=loc.getDisplayLanguage(loc);
 								
 								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
+								*/
+								System.out.print("spanish"+"#<>#");
 								
 								
 								

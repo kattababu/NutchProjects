@@ -17,7 +17,7 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
-import org.apache.tika.language.LanguageIdentifier;
+//import org.apache.tika.language.LanguageIdentifier;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -179,6 +179,7 @@ public class CanalEpsiode {
 								
 								
 						//////////Metadata_language/////////
+								/*
 								
 								LanguageIdentifier identifier = new LanguageIdentifier(title);
 								String lang=identifier.getLanguage();
@@ -186,7 +187,9 @@ public class CanalEpsiode {
 								String namevalue=loc.getDisplayLanguage(loc);
 								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
 								
+								*/
 								
+								System.out.print("spanish"+"#<>#");
 								
 						//////////Aka/////////
 								System.out.print("#<>#");

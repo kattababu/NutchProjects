@@ -5,7 +5,9 @@ package com.Nutch.Crawl.Canal;
 
 
 
+
 import java.io.FileOutputStream;
+
 import java.io.PrintStream;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -20,10 +22,13 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
+//import org.apache.tika.language.LanguageIdentifier;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import org.apache.tika.language.LanguageIdentifier;
+import com.lingway.ld.LangDetector;
+
+//import org.apache.tika.language.LanguageIdentifier;
 
 
 
@@ -237,15 +242,24 @@ public class CanalMT {
 								
 								
 						//////////Metadata_language/////////
+								/*
+								
 								
 								LanguageIdentifier identifier = new LanguageIdentifier(title);
-								String lang=identifier.getLanguage();
-								Locale loc =new Locale(lang);
-								String namevalue=loc.getDisplayLanguage(loc);
-								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
+									String lang=identifier.getLanguage();
+									System.out.println(lang);
+									Locale loc =new Locale(lang);
+									String namevalue=loc.getDisplayLanguage(loc);
+									System.out.print(namevalue.toLowerCase().trim()+"#<>#");
 								
 								
+								*/
+								System.out.print("spanish"+"#<>#");
 								
+						
+						
+								
+						
 								
 								//System.out.print(lang.trim()+"#<>#");
 								
