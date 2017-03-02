@@ -9,7 +9,7 @@ package com.Nutch.Crawl.Canal;
 import java.io.FileOutputStream;
 
 import java.io.PrintStream;
-import java.util.Locale;
+//import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 //import java.util.Scanner;
@@ -26,7 +26,7 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import com.lingway.ld.LangDetector;
+//import com.lingway.ld.LangDetector;
 
 //import org.apache.tika.language.LanguageIdentifier;
 

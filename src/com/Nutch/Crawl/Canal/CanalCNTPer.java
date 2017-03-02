@@ -7,7 +7,7 @@ package com.Nutch.Crawl.Canal;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.List;
-import java.util.Locale;
+//import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
