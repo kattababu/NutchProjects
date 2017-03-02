@@ -635,7 +635,7 @@ public class CanalCNTPer {
 									System.out.print("#<>#");
 									}
 									
-									System.out.print("#<>#");
+									//System.out.print("#<>#");
 									
 							/////////////Description///////////
 									System.out.print("#<>#");

@@ -437,7 +437,7 @@ public class CanalMT {
 								System.out.print("#<>#");
 								}
 								
-								System.out.print("#<>#");
+								//System.out.print("#<>#");
 								
 						/////////////Description///////////
 								System.out.print("#<>#");
