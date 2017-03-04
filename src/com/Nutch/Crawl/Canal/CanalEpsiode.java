@@ -38,7 +38,7 @@ public class CanalEpsiode {
 	HTable ht=null;
 	Scan sc=null;
 	ResultScanner resc;
-	String rownames=null,family=null,qualifier=null,content=null,splitter=null,splitterEps=null,splitterEno=null,splitterShow=null,splitterIMD=null,ImgDimes=null,splitterImage=null;
+	String rownames=null,family=null,qualifier=null,content=null,splitter=null,splitterEps=null,splitterEno=null,splitterShow=null,splitterIMD=null,ImgDimes=null,splitterImage=null,splitterEpisode=null;
 	static FileOutputStream fos =null;
 	static PrintStream ps=null;
 	
@@ -121,13 +121,14 @@ public class CanalEpsiode {
 								*/
 								String title=Xsoup.compile("//div[@class='texto']//text()").evaluate(document).get();
 								
-								System.out.print(title.trim()+"#<>#");
+								SplitEpisodetitle(title);
+								System.out.print(splitterEpisode.trim()+"#<>#");
 								
 								
 								
 								////////// Show Title/////////
 								SplitShowtitle(title);
-								System.out.print(splitterShow+"#<>#");
+								System.out.print(splitterShow.trim()+"#<>#");
 								
 								
 								////////// Original Title/////////
@@ -296,6 +297,13 @@ public class CanalEpsiode {
 	{
 		String[] split=name.split("\\:");
 		splitterShow=split[split.length - 2];
+		//System.out.println(splitter);
+	}
+	
+	public void SplitEpisodetitle(String name)
+	{
+		String[] split=name.split("\\:");
+		splitterEpisode=split[split.length - 1];
 		//System.out.println(splitter);
 	}
 	
