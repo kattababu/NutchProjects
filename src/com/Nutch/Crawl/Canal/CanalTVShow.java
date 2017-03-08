@@ -174,7 +174,7 @@ public class CanalTVShow {
 								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
 								
 								*/
-								System.out.print("spanish"+"#<>#");
+								System.out.print("Spanish"+"#<>#");
 								
 								
 								
@@ -362,7 +362,7 @@ public class CanalTVShow {
 								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
 								
 								*/
-								System.out.print("spanish"+"#<>#");
+								System.out.print("Spanish"+"#<>#");
 								
 								
 								
@@ -1184,7 +1184,7 @@ public class CanalTVShow {
 								
 								System.out.print(namevalue.toLowerCase().trim()+"#<>#");
 								*/
-								System.out.print("spanish"+"#<>#");
+								System.out.print("Spanish"+"#<>#");
 								
 								
 								

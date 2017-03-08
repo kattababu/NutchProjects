@@ -190,7 +190,7 @@ public class CanalEpsiode {
 								
 								*/
 								
-								System.out.print("spanish"+"#<>#");
+								System.out.print("Spanish"+"#<>#");
 								
 						//////////Aka/////////
 								System.out.print("#<>#");

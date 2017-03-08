@@ -254,7 +254,7 @@ public class CanalMT {
 								
 								
 								*/
-								System.out.print("spanish"+"#<>#");
+								System.out.print("Spanish"+"#<>#");
 								
 						
 						

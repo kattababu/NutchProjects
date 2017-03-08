@@ -470,7 +470,7 @@ public class CanalCNTPer {
 									System.out.print(namevalue.toLowerCase().trim()+"#<>#");
 									*/
 									
-									System.out.print("spanish"+"#<>#");
+									System.out.print("Spanish"+"#<>#");
 									
 									
 							//////////Aka/////////
