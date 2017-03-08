@@ -45,10 +45,17 @@ public class SplitFiles {
 	
 	static String tabn=null;
 	
-	final static String hostname="176.9.181.61";
+	/*final static String hostname="176.9.181.61";
 	final static String username="interns";
 	final static String password="hdrn59!";
 	final static String destination="/home/interns/sath_GenFramework/juicer/spiders/OUTPUT/processing/";
+	
+	*/
+	final static String hostname="office.headrun.com";
+	final static String username="hrb";
+	final static String password="satishdhawan16!";
+	final static String destination="/Users/hrb/MVP_PROD_NUTCH/";
+	
 	
 	
 	public static void FileSplitS() {
